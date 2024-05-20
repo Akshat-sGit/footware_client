@@ -53,7 +53,7 @@ class MySplashScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 25),
                     Text(
-                      "Explore all the most exiting jobs roles\nbased on your interest And study major",
+                      "Discover the trendiest shoe collections\n tailored to your style!",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontSize: 18,
@@ -69,10 +69,10 @@ class MySplashScreen extends StatelessWidget {
                         height: size.height * 0.08,
                         width: size.width,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: backgroundColor3.withOpacity(0.9),
+                          borderRadius: BorderRadius.circular(30),
+                          color: const Color(0xffFD6B68).withOpacity(0.8),
                           border: Border.all(
-                            color: Colors.white,
+                            color: const Color(0xffFD6B68),
                           ),
                           boxShadow: [
                             BoxShadow(
@@ -91,8 +91,8 @@ class MySplashScreen extends StatelessWidget {
                                 height: size.height * 0.08,
                                 width: size.width / 2.2,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15),
+                                  color: const Color(0xffFD6B68),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Center(
                                   child: Text(
@@ -100,7 +100,7 @@ class MySplashScreen extends StatelessWidget {
                                     style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
-                                      color: textColor1,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -120,7 +120,7 @@ class MySplashScreen extends StatelessWidget {
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
-                                    color: textColor1,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),

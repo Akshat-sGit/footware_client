@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footwear_client/utils/colors.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
 
@@ -9,13 +9,13 @@ class SignIn extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             colors: [
-              backgroundColor2,
-              backgroundColor2,
-              backgroundColor4,
+              Color(0xFF000000),
+              Color(0xFF000000),
+              Color(0xFF000000),
             ],
           ),
         ),
@@ -26,17 +26,18 @@ class SignIn extends StatelessWidget {
             Text(
               "Hello Again!",
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
                 fontSize: 37,
-                color: textColor1,
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 15),
             Text(
               "Wellcome back you've\nbeen missed!",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 27, color: textColor2, height: 1.2),
+              style: GoogleFonts.poppins(
+                  fontSize: 27, color: textColor2, height: 1.2),
             ),
             SizedBox(height: size.height * 0.04),
             // for username and password
@@ -105,11 +106,16 @@ class SignIn extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.06),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      socialIcon("images/google.png"),
-                      socialIcon("images/apple.png"),
-                      socialIcon("images/facebook.png"),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Flexible(child: socialIcon("images/google.png")),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Flexible(child: socialIcon("images/facebook.png")),
+                      ),
                     ],
                   ),
                   SizedBox(height: size.height * 0.07),
@@ -149,7 +155,7 @@ class SignIn extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.white,
+          color: Colors.black,
           width: 2,
         ),
       ),
