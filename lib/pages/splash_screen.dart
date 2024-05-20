@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:footwear_client/pages/register_screen.dart';
 import 'package:footwear_client/pages/signin_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:footwear_client/utils/colors.dart';
@@ -95,12 +96,23 @@ class MySplashScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Center(
-                                  child: Text(
-                                    "Register",
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      color: Colors.white,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Register(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      "Register",
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
