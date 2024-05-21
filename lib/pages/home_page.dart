@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footwear_client/widgets/dropdown_btn.dart';
+import 'package:footwear_client/widgets/multi_select_dropdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
@@ -61,6 +62,8 @@ class HomePage extends StatelessWidget {
                     selectedItem: 'Sort',
                     onSelected: (value) {}),
               ),
+              // add the multiselect
+              MultiSelectDropDown(items: [], selectedItems: selectedItems)
             ],
           ),
         ],
