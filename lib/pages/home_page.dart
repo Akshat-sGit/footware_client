@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:footwear_client/widgets/dropdown_btn.dart';
 import 'package:footwear_client/widgets/multi_select_dropdown.dart';
+import 'package:footwear_client/widgets/product_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
@@ -96,11 +96,7 @@ class HomePage extends StatelessWidget {
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8),
               itemBuilder: (context, index) {
-                return Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.red,
-                );
+                return const ProductCard(); 
               },
             ),
           )
@@ -109,3 +105,13 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+
+
+// Container(
+//                     width: 100,
+//                     height: 100,
+//                     decoration: BoxDecoration(
+//                       color: Colors.red,
+//                       borderRadius: BorderRadius.circular(20),
+//                     ));
