@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:footwear_client/widgets/dropdown_btn.dart';
 import 'package:footwear_client/widgets/multi_select_dropdown.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,10 +41,18 @@ class HomePage extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Chip(
-                    backgroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: const BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                      ),
+                    ),
+                    backgroundColor: Colors.white.withOpacity(0.9),
                     label: Text(
-                      'Category $index',
-                      style: GoogleFonts.poppins(color: Colors.white),
+                      'Category ${index + 1}',
+                      style: GoogleFonts.poppins(
+                          color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                   ),
                 );
@@ -70,14 +79,31 @@ class HomePage extends StatelessWidget {
               ),
               Flexible(
                 child: MultiSelectDropDown(
-                  items: const ['item1', 'item2'],
+                  items: const ['item1', 'item2', 'item3', 'item4'],
                   onSelectionChanged: (value) {
+                    // ignore: avoid_print
                     print(value);
                   },
                 ),
               ),
             ],
           ),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.8,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8),
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 100,
+                  height: 100,
+                  color: Colors.red,
+                );
+              },
+            ),
+          )
         ],
       ),
     );
