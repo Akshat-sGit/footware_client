@@ -34,36 +34,48 @@ class HomePage extends StatelessWidget {
           SizedBox(
             height: 50,
             child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: Chip(
-                        backgroundColor: Colors.black,
-                        label: Text('Category $index',
-                            style: GoogleFonts.poppins(color: Colors.white))),
-                  );
-                }),
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: Chip(
+                    backgroundColor: Colors.black,
+                    label: Text(
+                      'Category $index',
+                      style: GoogleFonts.poppins(color: Colors.white),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
           Row(
             children: [
               Flexible(
                 child: DropDown(
-                    dropdownItem: 'Filter Brand',
-                    items: const ['Nike', 'Puma', 'Adidas', 'Skechers'],
-                    selectedItem: 'Sort',
-                    onSelected: (value) {}),
+                  dropdownItem: 'Filter Brand',
+                  items: const ['Nike', 'Puma', 'Adidas', 'Skechers'],
+                  selectedItem: 'Sort',
+                  onSelected: (value) {},
+                ),
               ),
               Flexible(
                 child: DropDown(
-                    dropdownItem: 'Sort',
-                    items: const ['Price: Low to High', 'Price: High to Low'],
-                    selectedItem: 'Sort',
-                    onSelected: (value) {}),
+                  dropdownItem: 'Sort',
+                  items: const ['Price: Low to High', 'Price: High to Low'],
+                  selectedItem: 'Sort',
+                  onSelected: (value) {},
+                ),
               ),
-              // add the multiselect
-              MultiSelectDropDown(items: [], selectedItems: selectedItems)
+              Flexible(
+                child: MultiSelectDropDown(
+                  items: const ['item1', 'item2'],
+                  onSelectionChanged: (value) {
+                    print(value);
+                  },
+                ),
+              ),
             ],
           ),
         ],

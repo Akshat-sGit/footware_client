@@ -1,102 +1,107 @@
 import 'package:flutter/material.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-List<String> selectedItems = [];  
+List<String> selectedItems = [];
+
 class MultiSelectDropDown extends StatelessWidget {
-
   final List<String> items;
   final Function(List<String>) onSelectionChanged;
 
-  const MultiSelectDropDown({super.key, required this.items, required this.onSelectionChanged});
-
-
+  const MultiSelectDropDown({
+    super.key,
+    required this.items,
+    required this.onSelectionChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton2<String>(
-            isExpanded: true,
-            hint: Text(
-              'Select Items',
-              style: TextStyle(
-                fontSize: 14,
-                color: Theme.of(context).hintColor,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            elevation: 5,
+            padding: const EdgeInsets.all(10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: const BorderSide(
+                color: Colors.black,
+                width: 1,
               ),
             ),
-            items: items.map((item) {
-              return DropdownMenuItem(
-                value: item,
-                //disable default onTap to avoid closing menu when selecting an item
-                enabled: false,
-                child: StatefulBuilder(
-                  builder: (context, menuSetState) {
-                    final isSelected = selectedItems.contains(item);
-                    return InkWell(
-                      onTap: () {
-                        isSelected
-                            ? selectedItems.remove(item)
-                            : selectedItems.add(item);
-                        //This rebuilds the StatefulWidget to update the button's text
-                        // setState(() {});
-                        //This rebuilds the dropdownMenu Widget to update the check mark
-                        menuSetState(() {});
-                      },
-                      child: Container(
-                        height: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Row(
-                          children: [
-                            if (isSelected)
-                              const Icon(Icons.check_box_outlined)
-                            else
-                              const Icon(Icons.check_box_outline_blank),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Text(
-                                item,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
+          ),
+          onPressed: () {
+            showModalBottomSheet<void>(
+              context: context,
+              backgroundColor: Colors.white,
+              builder: (BuildContext context) {
+                return StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                    return Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: items.map((item) {
+                          final isSelected = selectedItems.contains(item);
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                isSelected
+                                    ? selectedItems.remove(item)
+                                    : selectedItems.add(item);
+                                onSelectionChanged(selectedItems);
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    isSelected
+                                        ? Icons.check_box_outlined
+                                        : Icons.check_box_outline_blank,
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      item,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          );
+                        }).toList(),
                       ),
                     );
                   },
-                ),
-              );
-            }).toList(),
-            //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
-            value: selectedItems.isEmpty ? null : selectedItems.last,
-            onChanged: (value) {},
-            selectedItemBuilder: (context) {
-              return items.map(
-                (item) {
-                  return Container(
-                    alignment: AlignmentDirectional.center,
-                    child: Text(
-                      selectedItems.join(', '),
-                      style: const TextStyle(
-                        fontSize: 14,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      maxLines: 1,
-                    ),
-                  );
-                },
-              ).toList();
-            },
-            buttonStyleData: const ButtonStyleData(
-              padding: EdgeInsets.only(left: 16, right: 8),
-              height: 40,
-              width: 140,
-            ),
-            menuItemStyleData: const MenuItemStyleData(
-              height: 40,
-              padding: EdgeInsets.zero,
+                );
+              },
+            );
+          },
+          child: SizedBox(
+            width: double.infinity,
+            child: Text(
+              selectedItems.isEmpty ? 'Select Items' : selectedItems.join(', '),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.clip,
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
