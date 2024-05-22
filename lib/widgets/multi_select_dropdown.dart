@@ -21,7 +21,7 @@ class MultiSelectDropDown extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.tealAccent,
+            backgroundColor: Colors.white,
             elevation: 5,
             padding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
@@ -98,10 +98,9 @@ class MultiSelectDropDown extends StatelessWidget {
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.clip,
-              style: GoogleFonts.poppins(
+              style: GoogleFonts.ubuntu(
                 color: Colors.black,
                 fontSize: 14,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),

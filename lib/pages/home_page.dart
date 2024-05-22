@@ -10,22 +10,22 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         title: Text(
           'Footwear Store',
-          style: GoogleFonts.poppins(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: GoogleFonts.arvo(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 3.0),
         ),
         actions: [
           IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.logout,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
         ],
@@ -48,11 +48,10 @@ class HomePage extends StatelessWidget {
                         width: 1,
                       ),
                     ),
-                    backgroundColor: Colors.redAccent,
+                    backgroundColor: Colors.white,
                     label: Text(
                       'Category ${index + 1}',
-                      style: GoogleFonts.poppins(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.ubuntu(color: Colors.black),
                     ),
                   ),
                 );
@@ -96,7 +95,13 @@ class HomePage extends StatelessWidget {
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8),
               itemBuilder: (context, index) {
-                return const ProductCard();
+                return const ProductCard(
+                  name: 'Adidas',
+                  iamgeUrl:
+                      'https://firebasestorage.googleapis.com/v0/b/ecommerce-66787.appspot.com/o/adidas1.jpg?alt=media&token=b3e251a6-7560-4c27-bddd-d61a4e526b81',
+                  price: 2000.0,
+                  offerTag: 'Yes',
+                );
               },
             ),
           )
@@ -105,13 +110,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
-
-// Container(
-//                     width: 100,
-//                     height: 100,
-//                     decoration: BoxDecoration(
-//                       color: Colors.red,
-//                       borderRadius: BorderRadius.circular(20),
-//                     ));

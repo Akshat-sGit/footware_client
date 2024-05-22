@@ -4,14 +4,26 @@ import 'package:google_fonts/google_fonts.dart';
 String url = '';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  final String name;
+  final String iamgeUrl;
+  final double price;
+  final String offerTag;
+
+  const ProductCard(
+      {super.key,
+      required this.name,
+      required this.iamgeUrl,
+      required this.price,
+      required this.offerTag});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.black,
-      elevation: 5,
+      shadowColor: Colors.black,
+      color: const Color(0xffffffff),
+      elevation: 2,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -22,20 +34,26 @@ class ProductCard extends StatelessWidget {
               height: 150,
             ),
           ),
-          const SizedBox(height: 10),
-          Text(
-            'Name',
-            style: GoogleFonts.poppins(fontSize: 14, color: Colors.white),
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 10),
-          Text(
-            'Price',
-            style: GoogleFonts.poppins(
-              color: Colors.white,
-              fontSize: 14,
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+            child: Text(
+              'Name',
+              style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+              overflow: TextOverflow.ellipsis,
             ),
-            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+            child: Text(
+              'Price',
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontSize: 14,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),
