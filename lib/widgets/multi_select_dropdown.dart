@@ -59,7 +59,8 @@ class MultiSelectDropDown extends StatelessWidget {
                               });
                             },
                             child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
                               child: Row(
                                 children: [
                                   Icon(
