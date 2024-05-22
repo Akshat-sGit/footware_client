@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:footwear_client/pages/product_description_page.dart';
 import 'package:footwear_client/widgets/dropdown_btn.dart';
 import 'package:footwear_client/widgets/multi_select_dropdown.dart';
 import 'package:footwear_client/widgets/product_card.dart';
@@ -10,7 +11,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
@@ -95,12 +95,20 @@ class HomePage extends StatelessWidget {
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8),
               itemBuilder: (context, index) {
-                return const ProductCard(
+                return ProductCard(
                   name: 'Adidas',
                   iamgeUrl:
                       'https://firebasestorage.googleapis.com/v0/b/ecommerce-66787.appspot.com/o/adidas1.jpg?alt=media&token=b3e251a6-7560-4c27-bddd-d61a4e526b81',
                   price: 2000.0,
                   offerTag: 'Yes',
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const ProductDescriptionPage()));
+                                
+                  },
                 );
               },
             ),
