@@ -48,11 +48,11 @@ class HomePage extends StatelessWidget {
                         width: 1,
                       ),
                     ),
-                    backgroundColor: Colors.white.withOpacity(0.9),
+                    backgroundColor: Colors.redAccent,
                     label: Text(
                       'Category ${index + 1}',
                       style: GoogleFonts.poppins(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                          color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                 );
@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8),
               itemBuilder: (context, index) {
-                return const ProductCard(); 
+                return const ProductCard();
               },
             ),
           )
