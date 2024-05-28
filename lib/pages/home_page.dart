@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text(
           'Footwear Store',
-          style: GoogleFonts.arvo(
+          style: GoogleFonts.belleza(
               color: Colors.black,
               fontWeight: FontWeight.bold,
               letterSpacing: 3.0),
@@ -97,20 +97,20 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ProductCard(
                   name: 'Adidas',
-                  iamgeUrl:
+                  imageUrl:
                       'https://firebasestorage.googleapis.com/v0/b/ecommerce-66787.appspot.com/o/adidas1.jpg?alt=media&token=b3e251a6-7560-4c27-bddd-d61a4e526b81',
                   price: 2000.0,
                   offerTag: 'Yes',
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const ProductDescriptionPage()));
-                                
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProductDescriptionPage()),
+                    );
                   },
                 );
               },
+              itemCount: 10, // Make sure to provide itemCount
             ),
           )
         ],
