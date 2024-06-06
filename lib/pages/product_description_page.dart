@@ -75,6 +75,7 @@ class ProductDescriptionPage extends StatelessWidget {
                   style: GoogleFonts.belleza(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
                 ),
               ),
