@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-// import 'package:firebase_core/firebase_core.dart';
+import 'package:footwear_client/model/user/user.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
@@ -18,19 +18,14 @@ class LoginController extends GetxController {
   addUser() {
     try {
       DocumentReference doc = userCollection.doc();
-      // Product product = Product(
-      //   id: doc.id,
-      //   name: nameController.text,
-      //   category: category,
-      //   description: descriptionController.text,
-      //   price: double.parse(priceController.text),
-      //   brand: brand,
-      //   image: imageController.text,
-      //   offer: offer,
-      // );
-      final produtJson = product.toJson();
-      doc.set(produtJson);
-      Get.snackbar('Success', 'Product added successfully',
+      User user= User(
+        id: doc.id,
+        name: 'Abc',
+        email: "abc@xyz.com"
+      );
+      final userJson = user.toJson();
+      doc.set(userJson);
+      Get.snackbar('Success', 'User added successfully',
           colorText: Colors.green);
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
