@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:footwear_client/model/user/user.dart';
 import 'package:get/get.dart';
+import 'package:otp_text_field_v2/otp_field_v2.dart';
 
 class LoginController extends GetxController {
 
@@ -12,6 +13,8 @@ class LoginController extends GetxController {
 
   TextEditingController registerNameCtrl = TextEditingController(); 
   TextEditingController registerNumberCtrl = TextEditingController(); 
+
+  OtpFieldControllerV2 otpController = OtpFieldControllerV2(); 
 
   @override
   void onInit() {
@@ -50,12 +53,7 @@ class LoginController extends GetxController {
     }else{
       Get.snackbar('Error', 'Otp not sent!', colorText: Colors.red);
     }
-
-
-
   }
-
-
-
+  
 
 }

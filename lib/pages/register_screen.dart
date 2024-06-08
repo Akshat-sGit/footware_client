@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footwear_client/pages/signin_screen.dart';
 import 'package:footwear_client/utils/colors.dart';
+import 'package:footwear_client/widgets/otp_txt_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';  // Import GetX package
 import 'package:footwear_client/controller/login_controller.dart';
@@ -53,6 +54,9 @@ class Register extends StatelessWidget {
                 myTextField("Enter your phone number", Colors.black26, ctrl.registerNumberCtrl),
                 const SizedBox(height: 10),
                 SizedBox(height: size.height * 0.04),
+                OtpTxtField(otpController: ctrl.otpController), 
+                const SizedBox(height: 20,), 
+                
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
