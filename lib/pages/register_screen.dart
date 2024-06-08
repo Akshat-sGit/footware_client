@@ -49,8 +49,8 @@ class Register extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.04),
                 // for name and phone number
-                myTextField("Enter your name", Colors.white),
-                myTextField("Enter your phone number", Colors.black26),
+                myTextField("Enter your name", Colors.white, ctrl.registerNameCtrl),
+                myTextField("Enter your phone number", Colors.black26, ctrl.registerNumberCtrl),
                 const SizedBox(height: 10),
                 SizedBox(height: size.height * 0.04),
                 Padding(
@@ -180,13 +180,14 @@ class Register extends StatelessWidget {
     );
   }
 
-  Container myTextField(String hint, Color color) {
+  Container myTextField(String hint, Color color, TextEditingController controller) {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 25,
         vertical: 10,
       ),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 20,
