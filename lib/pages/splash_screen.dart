@@ -46,17 +46,19 @@ class MySplashScreen extends StatelessWidget {
                     Text(
                       "Discover your \n Dream Footware",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
+                      style: GoogleFonts.bebasNeue(
                           fontWeight: FontWeight.bold,
                           fontSize: 40,
                           color: Colors.white,
-                          height: 1.2),
+                          height: 1.2, 
+                          // letterSpacing: 2.0, 
+                          ),
                     ),
                     const SizedBox(height: 25),
                     Text(
                       "Discover the trendiest shoe collections\n tailored to your style!",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
+                      style: GoogleFonts.jost(
                         fontSize: 18,
                         color: textColor3.withOpacity(0.8),
                       ),
@@ -108,7 +110,7 @@ class MySplashScreen extends StatelessWidget {
                                     },
                                     child: Text(
                                       "Register",
-                                      style: GoogleFonts.poppins(
+                                      style: GoogleFonts.bebasNeue(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20,
                                         color: Colors.white,
@@ -129,7 +131,7 @@ class MySplashScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   "Sign In",
-                                  style: GoogleFonts.poppins(
+                                  style: GoogleFonts.bebasNeue(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                     color: Colors.white,

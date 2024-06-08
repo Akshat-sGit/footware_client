@@ -10,13 +10,13 @@ class User {
   @JsonKey(name: 'name')
   String? name;
 
-  @JsonKey(name: 'email')
-  String? email;
+  @JsonKey(name: 'number')
+  int? number;
 
   User({
     this.id,
     this.name,
-    this.email,
+    this.number,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

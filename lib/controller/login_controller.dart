@@ -8,6 +8,11 @@ class LoginController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference userCollection;
 
+
+   
+  TextEditingController registerNameCtrl = TextEditingController(); 
+  TextEditingController registerNumberCtrl = TextEditingController(); 
+
   @override
   void onInit() {
     userCollection = firestore.collection('users'); 
@@ -17,11 +22,15 @@ class LoginController extends GetxController {
 
   addUser() {
     try {
+      if(registerNameCtrl.text.isEmpty || registerNumberCtrl.text.isEmpty){
+        Get.snackbar('Error', 'Please fill the required fields', colorText: Colors.red);  
+        return; 
+      }
       DocumentReference doc = userCollection.doc();
       User user= User(
         id: doc.id,
-        name: 'Abc',
-        email: "abc@xyz.com"
+        name: registerNameCtrl.text, 
+        number: int.parse(registerNumberCtrl.text), 
       );
       final userJson = user.toJson();
       doc.set(userJson);
