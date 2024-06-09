@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:footwear_client/pages/signin_screen.dart';
 import 'package:footwear_client/utils/colors.dart';
+import 'package:footwear_client/widgets/my_text_field.dart';
 import 'package:footwear_client/widgets/otp_txt_field.dart';
+import 'package:footwear_client/widgets/social_icon.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';  // Import GetX package
 import 'package:footwear_client/controller/login_controller.dart';
@@ -32,7 +34,7 @@ class Register extends StatelessWidget {
                 Text(
                   "Create Account",
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.bebasNeue(
                     fontWeight: FontWeight.bold,
                     fontSize: 37,
                     color: Colors.white,
@@ -42,7 +44,7 @@ class Register extends StatelessWidget {
                 Text(
                   "Fill the details to get started!",
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.bebasNeue(
                     fontSize: 18,
                     color: textColor2,
                     height: 1.2,
@@ -54,9 +56,8 @@ class Register extends StatelessWidget {
                 myTextField("Enter your phone number", Colors.black26, ctrl.registerNumberCtrl),
                 const SizedBox(height: 10),
                 SizedBox(height: size.height * 0.04),
-                OtpTxtField(otpController: ctrl.otpController), 
-                const SizedBox(height: 20,), 
-                
+                OtpTxtField(otpController: ctrl.otpController, visible: ctrl.otpFieldShown), 
+                SizedBox(height: size.height * 0.04), 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
@@ -65,6 +66,7 @@ class Register extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           ctrl.addUser(); 
+                          
                         },
                         child: Container(
                           width: size.width,
@@ -73,13 +75,14 @@ class Register extends StatelessWidget {
                             color: buttonColor,
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              "Register",
-                              style: TextStyle(
+                              "Send Otp", 
+                              style: GoogleFonts.bebasNeue(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                                 fontSize: 22,
+                                letterSpacing: 1.0 
                               ),
                             ),
                           ),
@@ -96,7 +99,7 @@ class Register extends StatelessWidget {
                           ),
                           Text(
                             "  Or continue with   ",
-                            style: TextStyle(
+                            style: GoogleFonts.bebasNeue(
                               fontWeight: FontWeight.bold,
                               color: textColor2,
                               fontSize: 16,
@@ -129,7 +132,7 @@ class Register extends StatelessWidget {
                         children: [
                           Text(
                             "Already have an account? ",
-                            style: TextStyle(
+                            style: GoogleFonts.bebasNeue(
                               color: textColor2,
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -162,54 +165,5 @@ class Register extends StatelessWidget {
         ),
       );
     });
-  }
-
-  Container socialIcon(String image) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 32,
-        vertical: 15,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.black,
-          width: 2,
-        ),
-      ),
-      child: Image.asset(
-        image,
-        height: 35,
-      ),
-    );
-  }
-
-  Container myTextField(String hint, Color color, TextEditingController controller) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 25,
-        vertical: 10,
-      ),
-      child: TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 22,
-          ),
-          fillColor: Colors.white,
-          filled: true,
-          border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          hintText: hint,
-          hintStyle: const TextStyle(
-            color: Colors.black45,
-            fontSize: 19,
-          ),
-        ),
-      ),
-    );
   }
 }

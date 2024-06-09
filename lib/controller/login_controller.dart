@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison, avoid_print
+
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,6 +17,8 @@ class LoginController extends GetxController {
   TextEditingController registerNumberCtrl = TextEditingController(); 
 
   OtpFieldControllerV2 otpController = OtpFieldControllerV2(); 
+
+  bool otpFieldShown = false;
 
   @override
   void onInit() {
@@ -49,6 +53,7 @@ class LoginController extends GetxController {
     int otp = 1000 + random.nextInt(9000);  
     print(otp); 
     if(otp!= null){
+      otpFieldShown = true; 
       Get.snackbar('Success', 'Otp sent successfully!', colorText: Colors.green); 
     }else{
       Get.snackbar('Error', 'Otp not sent!', colorText: Colors.red);
