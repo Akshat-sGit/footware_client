@@ -19,6 +19,7 @@ class LoginController extends GetxController {
   OtpFieldControllerV2 otpController = OtpFieldControllerV2(); 
 
   bool otpFieldShown = false;
+  int? otpSend ;
 
   @override
   void onInit() {
@@ -49,14 +50,26 @@ class LoginController extends GetxController {
   }
 
   sendOtp() {
+
+    try{
+    if(registerNameCtrl.text.isEmpty || registerNumberCtrl.text.isEmpty) {
+      Get.snackbar('Error', 'Please fill the fields!', colorText: Colors.red); 
+      return; 
+    }
     final random = Random();
     int otp = 1000 + random.nextInt(9000);  
     print(otp); 
     if(otp!= null){
       otpFieldShown = true; 
+      otpSend = otp; 
       Get.snackbar('Success', 'Otp sent successfully!', colorText: Colors.green); 
     }else{
       Get.snackbar('Error', 'Otp not sent!', colorText: Colors.red);
+    }
+    }catch (e) {
+      print(e); 
+    }finally{
+      update(); 
     }
   }
   

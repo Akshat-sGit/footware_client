@@ -65,8 +65,11 @@ class Register extends StatelessWidget {
                       // for register button
                       GestureDetector(
                         onTap: () {
-                          ctrl.addUser(); 
-                          
+                          if(ctrl.otpFieldShown){
+                            ctrl.addUser();
+                          }else{
+                            ctrl.sendOtp(); 
+                          }
                         },
                         child: Container(
                           width: size.width,
