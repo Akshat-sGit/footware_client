@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footwear_client/utils/colors.dart';
+import 'package:footwear_client/widgets/social_icon.dart';
 import 'package:google_fonts/google_fonts.dart';
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -9,16 +10,7 @@ class SignIn extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            colors: [
-              Color(0xFF000000),
-              Color(0xFF000000),
-              Color(0xFF000000),
-            ],
-          ),
-        ),
+       color: Colors.white,
         child: SafeArea(
             child: ListView(
           children: [
@@ -26,17 +18,17 @@ class SignIn extends StatelessWidget {
             Text(
               "Hello Again!",
               textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
+              style: GoogleFonts.bebasNeue(
                 fontWeight: FontWeight.bold,
                 fontSize: 37,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
             const SizedBox(height: 15),
             Text(
               "Wellcome back you've\nbeen missed!",
               textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
+              style: GoogleFonts.bebasNeue(
                   fontSize: 27, color: textColor2, height: 1.2),
             ),
             SizedBox(height: size.height * 0.04),
@@ -49,7 +41,7 @@ class SignIn extends StatelessWidget {
               child: Text(
                 "Recovery Password               ",
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: GoogleFonts.bebasNeue(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                   color: textColor2,
@@ -69,13 +61,14 @@ class SignIn extends StatelessWidget {
                       color: buttonColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         "Sign In",
-                        style: TextStyle(
+                        style: GoogleFonts.bebasNeue(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           fontSize: 22,
+                          letterSpacing: 1,
                         ),
                       ),
                     ),
@@ -91,7 +84,7 @@ class SignIn extends StatelessWidget {
                       ),
                       Text(
                         "  Or continue with   ",
-                        style: TextStyle(
+                        style: GoogleFonts.bebasNeue(
                           fontWeight: FontWeight.bold,
                           color: textColor2,
                           fontSize: 16,
@@ -122,15 +115,15 @@ class SignIn extends StatelessWidget {
                   Text.rich(
                     TextSpan(
                         text: "Not a member? ",
-                        style: TextStyle(
+                        style: GoogleFonts.bebasNeue(
                           color: textColor2,
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                         ),
-                        children: const [
+                        children:[
                           TextSpan(
                             text: "Register now",
-                            style: TextStyle(
+                            style: GoogleFonts.bebasNeue(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
                             ),
@@ -146,25 +139,6 @@ class SignIn extends StatelessWidget {
     );
   }
 
-  Container socialIcon(image) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 32,
-        vertical: 15,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.black,
-          width: 2,
-        ),
-      ),
-      child: Image.asset(
-        image,
-        height: 35,
-      ),
-    );
-  }
 
   Container myTextField(String hint, Color color) {
     return Container(
@@ -185,7 +159,7 @@ class SignIn extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
             hintText: hint,
-            hintStyle: const TextStyle(
+            hintStyle: GoogleFonts.bebasNeue(
               color: Colors.black45,
               fontSize: 19,
             ),

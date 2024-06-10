@@ -64,9 +64,12 @@ class Register extends StatelessWidget {
                         onTap: () {
                           if(ctrl.otpFieldShown){
                             ctrl.addUser();
+
                           }else{
                             ctrl.sendOtp(); 
+
                           }
+                          ctrl.update(); 
                         },
                         child: Container(
                           width: size.width,
@@ -77,7 +80,7 @@ class Register extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              "Send Otp", 
+                              ctrl.buttonName, 
                               style: GoogleFonts.bebasNeue(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -118,7 +121,17 @@ class Register extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: socialIcon("images/google.png"),
+                            child: Container(
+                              padding: const EdgeInsets.all(5.0), 
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
+                              borderRadius: BorderRadius.circular(5.0),
+                              ), 
+                              child: socialIcon("images/google.png")
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -146,11 +159,12 @@ class Register extends StatelessWidget {
                                     builder: (context) => const SignIn()),
                               );
                             },
-                            child: const Text(
+                            child: Text(
                               "Sign In",
-                              style: TextStyle(
+                              style: GoogleFonts.bebasNeue(
                                 color: Colors.blue,
                                 fontWeight: FontWeight.bold,
+                                letterSpacing: 0.5, 
                               ),
                             ),
                           ),

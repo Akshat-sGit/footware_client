@@ -21,7 +21,7 @@ class OtpTxtField extends StatelessWidget {
         fieldWidth: 45,
         fieldStyle: FieldStyle.underline,
         outlineBorderRadius: 15,
-        style: GoogleFonts.bebasNeue(fontSize: 17, color: Colors.white),
+        style: GoogleFonts.bebasNeue(fontSize: 17, color: Colors.black),
         onChanged: (pin) {
           // ignore: avoid_print
           print("Changed: $pin");
@@ -31,6 +31,7 @@ class OtpTxtField extends StatelessWidget {
         },
         otpFieldStyle: OtpFieldStyle(
           borderColor: Colors.transparent,
+
         ),
 
       ),
