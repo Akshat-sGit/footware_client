@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:footwear_client/pages/register_screen.dart';
 import 'package:footwear_client/pages/signin_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:footwear_client/utils/colors.dart';
 
 class MySplashScreen extends StatelessWidget {
   const MySplashScreen({super.key});
@@ -12,7 +11,7 @@ class MySplashScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        color: Colors.black,
+        color: Colors.white,
         height: size.height,
         width: size.width,
         child: Stack(
@@ -27,6 +26,14 @@ class MySplashScreen extends StatelessWidget {
                     bottomLeft: Radius.circular(40),
                     bottomRight: Radius.circular(40),
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black, 
+                      spreadRadius: 1, 
+                      blurRadius: 10, 
+                      offset: Offset(0, 2),
+                    )
+                  ],
                   color: Colors.black,
                   image: DecorationImage(
                     image: AssetImage(
@@ -49,7 +56,7 @@ class MySplashScreen extends StatelessWidget {
                       style: GoogleFonts.bebasNeue(
                           fontWeight: FontWeight.bold,
                           fontSize: 40,
-                          color: Colors.white,
+                          color: Colors.black,
                           height: 1.2, 
                           // letterSpacing: 2.0, 
                           ),
@@ -58,9 +65,10 @@ class MySplashScreen extends StatelessWidget {
                     Text(
                       "Discover the trendiest shoe collections\n tailored to your style!",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.jost(
+                      style: GoogleFonts.bebasNeue(
                         fontSize: 18,
-                        color: textColor3.withOpacity(0.8),
+                        color: Colors.black.withOpacity(0.8),
+                        letterSpacing: 0.4,
                       ),
                     ),
                     SizedBox(height: size.height * 0.07),

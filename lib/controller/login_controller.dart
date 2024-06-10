@@ -20,6 +20,7 @@ class LoginController extends GetxController {
 
   bool otpFieldShown = false;
   int? otpSend ;
+  int? otpEntered; 
 
   @override
   void onInit() {
@@ -30,20 +31,22 @@ class LoginController extends GetxController {
 
   addUser() {
     try {
-      if(registerNameCtrl.text.isEmpty || registerNumberCtrl.text.isEmpty){
-        Get.snackbar('Error', 'Please fill the required fields', colorText: Colors.red);  
-        return; 
+      if(otpSend == otpEntered){
+        DocumentReference doc = userCollection.doc();
+        User user= User(
+          id: doc.id,
+          name: registerNameCtrl.text, 
+          number: int.parse(registerNumberCtrl.text), 
+        );
+        final userJson = user.toJson();
+        doc.set(userJson);
+        Get.snackbar('Success', 'User added successfully',colorText: Colors.green); 
+        registerNameCtrl.clear(); 
+        registerNumberCtrl.clear(); 
+        otpController.clear(); 
+      }else{
+        Get.snackbar('Error', 'OTP is incorrect',colorText: Colors.red ); 
       }
-      DocumentReference doc = userCollection.doc();
-      User user= User(
-        id: doc.id,
-        name: registerNameCtrl.text, 
-        number: int.parse(registerNumberCtrl.text), 
-      );
-      final userJson = user.toJson();
-      doc.set(userJson);
-      Get.snackbar('Success', 'User added successfully',
-          colorText: Colors.green);
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
     }

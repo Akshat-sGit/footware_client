@@ -17,16 +17,7 @@ class Register extends StatelessWidget {
     return GetBuilder<LoginController>(builder: (ctrl) {
       return Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              colors: [
-                Color(0xFF000000),
-                Color(0xFF000000),
-                Color(0xFF000000),
-              ],
-            ),
-          ),
+          color: Colors.white,
           child: SafeArea(
             child: ListView(
               children: [
@@ -37,7 +28,7 @@ class Register extends StatelessWidget {
                   style: GoogleFonts.bebasNeue(
                     fontWeight: FontWeight.bold,
                     fontSize: 37,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -56,7 +47,13 @@ class Register extends StatelessWidget {
                 myTextField("Enter your phone number", Colors.black26, ctrl.registerNumberCtrl),
                 const SizedBox(height: 10),
                 SizedBox(height: size.height * 0.04),
-                OtpTxtField(otpController: ctrl.otpController, visible: ctrl.otpFieldShown), 
+                OtpTxtField(
+                  otpController: ctrl.otpController,
+                  visible: ctrl.otpFieldShown, 
+                  onComplete: (otp){
+                    ctrl.otpEntered = int.tryParse(otp ?? '0000'); 
+                  },
+                ), 
                 SizedBox(height: size.height * 0.04), 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
