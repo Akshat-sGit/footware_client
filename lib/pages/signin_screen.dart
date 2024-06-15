@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:footwear_client/controller/login_controller.dart';
+import 'package:footwear_client/pages/register_screen.dart';
 import 'package:footwear_client/utils/colors.dart';
+import 'package:footwear_client/widgets/my_text_field.dart';
 import 'package:footwear_client/widgets/social_icon.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:google_fonts/google_fonts.dart';
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -8,6 +12,7 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+     return GetBuilder<LoginController>(builder: (ctrl) {
     return Scaffold(
       body: Container(
        color: Colors.white,
@@ -33,42 +38,41 @@ class SignIn extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.04),
             // for username and password
-            myTextField("Enter username", Colors.white),
-            myTextField("Password", Colors.black26),
-            const SizedBox(height: 10),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                "Recovery Password               ",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.bebasNeue(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: textColor2,
-                ),
+            myTextField(
+              "Enter Phone Number", 
+              Colors.white,
+              ctrl.loginNumberCtrl, 
               ),
-            ),
+            // myTextField("Password", Colors.black26),
+            const SizedBox(height: 10),
             SizedBox(height: size.height * 0.04),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
                   // for sign in button
-                  Container(
-                    width: size.width,
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      color: buttonColor,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Sign In",
-                        style: GoogleFonts.bebasNeue(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 22,
-                          letterSpacing: 1,
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Add product to database
+                        ctrl.loginWithPhone();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      child:  Padding(
+                        padding:const EdgeInsets.all(10),
+                        child: Text(
+                          "Sign In",
+                          style: GoogleFonts.bebasNeue(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -112,24 +116,36 @@ class SignIn extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: size.height * 0.07),
-                  Text.rich(
-                    TextSpan(
-                        text: "Not a member? ",
-                        style: GoogleFonts.bebasNeue(
-                          color: textColor2,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                        children:[
-                          TextSpan(
-                            text: "Register now",
+                  Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Not a member? ",
                             style: GoogleFonts.bebasNeue(
-                              color: Colors.blue,
+                              color: textColor2,
                               fontWeight: FontWeight.bold,
+                              fontSize: 15,
                             ),
-                          )
-                        ]),
-                  ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Register()),
+                              );
+                            },
+                            child: Text(
+                              "Register Now",
+                              style: GoogleFonts.bebasNeue(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 0.5, 
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                 ],
               ),
             ),
@@ -137,37 +153,7 @@ class SignIn extends StatelessWidget {
         )),
       ),
     );
-  }
-
-
-  Container myTextField(String hint, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 25,
-        vertical: 10,
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 22,
-            ),
-            fillColor: Colors.white,
-            filled: true,
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            hintText: hint,
-            hintStyle: GoogleFonts.bebasNeue(
-              color: Colors.black45,
-              fontSize: 19,
-            ),
-            suffixIcon: Icon(
-              Icons.visibility_off_outlined,
-              color: color,
-            )),
-      ),
-    );
+  }); 
   }
 }
+

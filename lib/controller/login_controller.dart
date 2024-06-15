@@ -2,15 +2,21 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:footwear_client/model/user/user.dart';
+import 'package:footwear_client/pages/home_page.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:otp_text_field_v2/otp_field_v2.dart';
 
 class LoginController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference userCollection;
+  
+  GetStorage box = GetStorage(); 
 
   TextEditingController registerNameCtrl = TextEditingController();
   TextEditingController registerNumberCtrl = TextEditingController();
+
+  TextEditingController loginNumberCtrl = TextEditingController(); 
 
   OtpFieldControllerV2 otpController = OtpFieldControllerV2();
 
@@ -72,4 +78,36 @@ class LoginController extends GetxController {
   String get buttonName {
     return otpFieldShown ? 'Register' : 'Send OTP';
   }
+
+  Future<void> loginWithPhone() async {
+  try {
+    String phoneNumber = loginNumberCtrl.text.trim(); // Trim any leading or trailing spaces
+    if (phoneNumber.isNotEmpty) {
+      int? phoneNumberParsed = int.tryParse(phoneNumber); // Ensure phone number is parsed correctly
+      if (phoneNumberParsed != null) {
+        var querySnapshot = await userCollection.where('number', isEqualTo: phoneNumberParsed).limit(1).get();  
+        if (querySnapshot.docs.isNotEmpty) {
+          var userDoc = querySnapshot.docs.first; 
+          var userData = userDoc.data() as Map<String, dynamic>;  
+          box.write('loginUser', userData); 
+          loginNumberCtrl.clear(); 
+          Get.to(const HomePage()); 
+          Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.white, backgroundColor: Colors.green); 
+        } else {
+          Get.snackbar('Error', 'User not found, please register', colorText: Colors.white, backgroundColor: Colors.red);
+        }
+      } else {
+        Get.snackbar('Error', 'Invalid phone number', colorText: Colors.white, backgroundColor: Colors.red);
+      }
+    } else {
+      Get.snackbar('Error', 'Please enter a phone number', colorText: Colors.white, backgroundColor: Colors.red);
+    }
+  } catch (error) {
+    Get.snackbar('Error', 'Failed to login: $error', colorText: Colors.white, backgroundColor: Colors.red);  
+  }
+}
+
+
+
+
 }

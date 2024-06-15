@@ -106,22 +106,24 @@ class MySplashScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Center(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const Register(),
+                                  child: InkWell(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const Register(),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        "Register",
+                                        style: GoogleFonts.bebasNeue(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                          color: Colors.white,
                                         ),
-                                      );
-                                    },
-                                    child: Text(
-                                      "Register",
-                                      style: GoogleFonts.bebasNeue(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        color: Colors.white,
                                       ),
                                     ),
                                   ),
