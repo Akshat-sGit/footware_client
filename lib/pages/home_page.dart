@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footwear_client/pages/product_description_page.dart';
 import 'package:footwear_client/pages/signin_screen.dart';
+import 'package:footwear_client/utils/colors.dart';
 import 'package:footwear_client/widgets/dropdown_btn.dart';
 import 'package:footwear_client/widgets/multi_select_dropdown.dart';
 import 'package:footwear_client/widgets/product_card.dart';
@@ -18,10 +19,10 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text(
           'Footwear Store',
-          style: GoogleFonts.belleza(
+          style: GoogleFonts.bebasNeue(
               color: Colors.black,
               fontWeight: FontWeight.bold,
-              letterSpacing: 3.0),
+              letterSpacing: 1.5),
         ),
         actions: [
           IconButton(
@@ -47,18 +48,31 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(6.0),
-                  child: Chip(
-                    shape: RoundedRectangleBorder(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 1,
+                          blurRadius: 5,
+                          offset:const Offset(0, 2),
+                        ),
+                      ],
                       borderRadius: BorderRadius.circular(20),
-                      side: const BorderSide(
-                        color: Colors.black,
-                        width: 1,
-                      ),
                     ),
-                    backgroundColor: Colors.white,
-                    label: Text(
-                      'Category ${index + 1}',
-                      style: GoogleFonts.ubuntu(color: Colors.black),
+                    child: Chip(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: BorderSide(
+                          color: buttonColor,
+                          width: 1,
+                        ),
+                      ),
+                      backgroundColor: buttonColor,
+                      label: Text(
+                        'Category ${index + 1}',
+                        style: GoogleFonts.bebasNeue(color: Colors.white, fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
                 );
@@ -105,7 +119,7 @@ class HomePage extends StatelessWidget {
                 return ProductCard(
                   name: 'Adidas',
                   imageUrl:
-                      'https://firebasestorage.googleapis.com/v0/b/ecommerce-66787.appspot.com/o/adidas1.jpg?alt=media&token=b3e251a6-7560-4c27-bddd-d61a4e526b81',
+                  'https://firebasestorage.googleapis.com/v0/b/ecommerce-66787.appspot.com/o/nike1.jpg?alt=media&token=9f74d9fc-cbcb-4781-b990-c3e637c3be4c',                  
                   price: 2000.0,
                   offerTag: 'Yes',
                   onTap: () {

@@ -10,18 +10,18 @@ class ProductDescriptionPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Product Details",
-          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+          style: GoogleFonts.bebasNeue(fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                'https://firebasestorage.googleapis.com/v0/b/ecommerce-66787.appspot.com/o/adidas1.jpg?alt=media&token=b3e251a6-7560-4c27-bddd-d61a4e526b81',
+                'https://firebasestorage.googleapis.com/v0/b/ecommerce-66787.appspot.com/o/nike1.jpg?alt=media&token=9f74d9fc-cbcb-4781-b990-c3e637c3be4c',
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 200,
@@ -31,13 +31,13 @@ class ProductDescriptionPage extends StatelessWidget {
             Text(
               "Puma Footware",
               style:
-                  GoogleFonts.oswald(fontWeight: FontWeight.bold, fontSize: 20),
+                  GoogleFonts.bebasNeue(fontWeight: FontWeight.bold, fontSize: 25),
             ),
             const SizedBox(height: 20),
             Text(
               "Product Description",
-              style: GoogleFonts.openSans(
-                fontSize: 15,
+              style: GoogleFonts.bebasNeue(
+                fontSize: 18,
               ),
             ),
             const SizedBox(height: 20),
@@ -72,7 +72,7 @@ class ProductDescriptionPage extends StatelessWidget {
                 onPressed: () {},
                 child: Text(
                   'Buy Now',
-                  style: GoogleFonts.belleza(
+                  style: GoogleFonts.bebasNeue(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 20,

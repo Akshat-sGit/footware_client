@@ -24,7 +24,7 @@ class DropDown extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xffffffff),
+            backgroundColor: Colors.black,
             elevation: 5,
             padding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
@@ -51,7 +51,7 @@ class DropDown extends StatelessWidget {
                         child: Text(
                           dropdownItem,
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.bebasNeue(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black, // Ensure text is visible
@@ -98,8 +98,9 @@ class DropDown extends StatelessWidget {
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.clip,
-              style: GoogleFonts.ubuntu(
-                color: Colors.black, // Ensure text is visible
+              style: GoogleFonts.bebasNeue(
+                color: Colors.white, // Ensure text is visible
+                fontWeight: FontWeight.w600,
                 fontSize: 14, // Increase font size for better readability
               ),
             ),

@@ -39,35 +39,43 @@ class ProductCard extends StatelessWidget {
             ),
             const SizedBox(height: 2),
             Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 name,
-                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
-              child: Text(
-                '₹${price.toStringAsFixed(2)}',
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.bebasNeue(
+                  fontSize: 16,
                   color: Colors.black,
-                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
                 ),
                 overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
             ),
             const SizedBox(height: 2),
             Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                '₹${price.toStringAsFixed(2)}',
+                style: GoogleFonts.bebasNeue(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 offerTag,
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.bebasNeue(
                   color: Colors.red,
                   fontSize: 14,
                 ),
                 overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
             ),
           ],
