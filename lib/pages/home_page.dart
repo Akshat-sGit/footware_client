@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footwear_client/pages/product_description_page.dart';
-import 'package:footwear_client/pages/signin_screen.dart';
+import 'package:footwear_client/pages/splash_screen.dart';
 import 'package:footwear_client/utils/colors.dart';
 import 'package:footwear_client/widgets/dropdown_btn.dart';
 import 'package:footwear_client/widgets/multi_select_dropdown.dart';
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               GetStorage box = GetStorage(); 
               box.erase(); 
-              Get.offAll(const SignIn());
+              Get.offAll(const MySplashScreen());
             },
             icon: const Icon(
               Icons.logout,
