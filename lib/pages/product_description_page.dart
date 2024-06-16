@@ -29,7 +29,7 @@ class ProductDescriptionPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              "Puma Footware",
+              "Nike Shoes",
               style:
                   GoogleFonts.bebasNeue(fontWeight: FontWeight.bold, fontSize: 25),
             ),
@@ -43,7 +43,7 @@ class ProductDescriptionPage extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               "₹3000",
-              style: GoogleFonts.ebGaramond(
+              style: GoogleFonts.bebasNeue(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.green),
@@ -63,12 +63,12 @@ class ProductDescriptionPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.black,
                     elevation: 5,
                     shadowColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: const BorderSide(color: Colors.blue, width: 1))),
+                        borderRadius: BorderRadius.circular(10),
+                        side: const BorderSide(color: Colors.black, width: 1))),
                 onPressed: () {},
                 child: Text(
                   'Buy Now',

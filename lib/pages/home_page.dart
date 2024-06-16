@@ -117,7 +117,7 @@ class HomePage extends StatelessWidget {
                   mainAxisSpacing: 8),
               itemBuilder: (context, index) {
                 return ProductCard(
-                  name: 'Adidas',
+                  name: 'Nike',
                   imageUrl:
                   'https://firebasestorage.googleapis.com/v0/b/ecommerce-66787.appspot.com/o/nike1.jpg?alt=media&token=9f74d9fc-cbcb-4781-b990-c3e637c3be4c',                  
                   price: 2000.0,
