@@ -25,6 +25,11 @@ class LoginController extends GetxController {
   int? otpEntered;
 
   @override
+  void onReady(){
+    Get.to(const HomePage()); 
+  }
+
+  @override
   void onInit() {
     userCollection = firestore.collection('users');
     super.onInit();
@@ -92,18 +97,18 @@ class LoginController extends GetxController {
           box.write('loginUser', userData); 
           loginNumberCtrl.clear(); 
           Get.to(const HomePage()); 
-          Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.white, backgroundColor: Colors.green); 
+          Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green); 
         } else {
-          Get.snackbar('Error', 'User not found, please register', colorText: Colors.white, backgroundColor: Colors.red);
+          Get.snackbar('Error', 'User not found, please register',  colorText: Colors.red);
         }
       } else {
-        Get.snackbar('Error', 'Invalid phone number', colorText: Colors.white, backgroundColor: Colors.red);
+        Get.snackbar('Error', 'Invalid phone number', colorText: Colors.red);
       }
     } else {
-      Get.snackbar('Error', 'Please enter a phone number', colorText: Colors.white, backgroundColor: Colors.red);
+      Get.snackbar('Error', 'Please enter a phone number', colorText: Colors.red);
     }
   } catch (error) {
-    Get.snackbar('Error', 'Failed to login: $error', colorText: Colors.white, backgroundColor: Colors.red);  
+    Get.snackbar('Error', 'Failed to login: $error', colorText: Colors.red);  
   }
 }
 

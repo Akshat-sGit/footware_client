@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:footwear_client/pages/product_description_page.dart';
+import 'package:footwear_client/pages/signin_screen.dart';
 import 'package:footwear_client/widgets/dropdown_btn.dart';
 import 'package:footwear_client/widgets/multi_select_dropdown.dart';
 import 'package:footwear_client/widgets/product_card.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,7 +25,11 @@ class HomePage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              GetStorage box = GetStorage(); 
+              box.erase(); 
+              Get.offAll(const SignIn());
+            },
             icon: const Icon(
               Icons.logout,
               color: Colors.black,
