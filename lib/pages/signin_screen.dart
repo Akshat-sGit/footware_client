@@ -19,6 +19,7 @@ class SignIn extends StatelessWidget {
           color: Colors.white,
           child: SafeArea(
             child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               children: [
                 SizedBox(height: size.height * 0.03),
                 Text(
@@ -41,118 +42,108 @@ class SignIn extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: size.height * 0.04),
-                // for username and password
                 myTextField(
                   "Enter Phone Number",
                   Colors.white,
                   ctrl.loginNumberCtrl,
                 ),
-                // myTextField("Password", Colors.black26),
                 const SizedBox(height: 10),
                 SizedBox(height: size.height * 0.04),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                    children: [
-                      // for sign in button
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // Add product to database
-                            ctrl.loginWithPhone();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: buttonColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Text(
-                              "Sign In",
-                              style: GoogleFonts.bebasNeue(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Add product to database
+                      ctrl.loginWithPhone();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        "Sign In",
+                        style: GoogleFonts.bebasNeue(
+                          color: Colors.white,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: size.height * 0.06),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 2,
-                            width: size.width * 0.2,
-                            color: Colors.black12,
-                          ),
-                          Text(
-                            "  Or continue with   ",
-                            style: GoogleFonts.bebasNeue(
-                              fontWeight: FontWeight.bold,
-                              color: textColor2,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Container(
-                            height: 2,
-                            width: size.width * 0.2,
-                            color: Colors.black12,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: size.height * 0.06),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: socialIcon("images/google.png"),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: socialIcon("images/facebook.png"),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: size.height * 0.07),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Not a member? ",
-                            style: GoogleFonts.bebasNeue(
-                              color: textColor2,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const Register(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              "Register Now",
-                              style: GoogleFonts.bebasNeue(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
                   ),
+                ),
+                SizedBox(height: size.height * 0.06),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 2,
+                      width: size.width * 0.2,
+                      color: Colors.black12,
+                    ),
+                    Text(
+                      "  Or continue with   ",
+                      style: GoogleFonts.bebasNeue(
+                        fontWeight: FontWeight.bold,
+                        color: textColor2,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Container(
+                      height: 2,
+                      width: size.width * 0.2,
+                      color: Colors.black12,
+                    ),
+                  ],
+                ),
+                SizedBox(height: size.height * 0.06),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: socialIcon("images/google.png"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: socialIcon("images/facebook.png"),
+                    ),
+                  ],
+                ),
+                SizedBox(height: size.height * 0.07),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Not a member? ",
+                      style: GoogleFonts.bebasNeue(
+                        color: textColor2,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Register(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Register Now",
+                        style: GoogleFonts.bebasNeue(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

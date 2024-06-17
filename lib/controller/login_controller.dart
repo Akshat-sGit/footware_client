@@ -25,11 +25,11 @@ class LoginController extends GetxController {
   int? otpEntered;
 
   @override
-  void onReady() {
-    super.onReady(); 
+  void onReady() async {
+  super.onReady(); 
     Map<String, dynamic>? user = box.read('loginUser');
     if (user != null) {
-     Get.to(() => const HomePage()); 
+     await Get.to(() => const HomePage()); 
     }
 
   }
