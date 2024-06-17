@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,7 @@ class LoginController extends GetxController {
     if (user != null) {
      await Get.to(() => const HomePage()); 
     }
-
+    print("OnReady called"); 
   }
 
   @override
@@ -93,15 +95,22 @@ class LoginController extends GetxController {
       String phoneNumber = loginNumberCtrl.text.trim();
       if (phoneNumber.isNotEmpty) {
         int? phoneNumberParsed = int.tryParse(phoneNumber);
+        print("1"); 
         if (phoneNumberParsed != null) {
           var querySnapshot = await userCollection.where('number', isEqualTo: phoneNumberParsed).limit(1).get();
+          print('2'); 
           if (querySnapshot.docs.isNotEmpty) {
             var userDoc = querySnapshot.docs.first;
+            print('3'); 
             var userData = userDoc.data() as Map<String, dynamic>;
+            print('4'); 
             box.write('loginUser', userData);
+            print('5'); 
             loginNumberCtrl.clear();
-            Get.to(() => const HomePage());
-            Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green);
+            print('6'); 
+            Get.to(() =>const HomePage()); 
+            // Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green);
+            print('7');
           } else {
             Get.snackbar('Error', 'User not found, please register', colorText: Colors.red);
           }

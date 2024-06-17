@@ -53,7 +53,6 @@ class SignIn extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add product to database
                       ctrl.loginWithPhone();
                     },
                     style: ElevatedButton.styleFrom(
