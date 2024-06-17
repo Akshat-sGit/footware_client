@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:footwear_client/controller/home_controller.dart';
 import 'package:footwear_client/pages/product_description_page.dart';
 import 'package:footwear_client/pages/splash_screen.dart';
 import 'package:footwear_client/utils/colors.dart';
@@ -13,32 +14,34 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
+
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          'Footwear Store',
-          style: GoogleFonts.bebasNeue(
+    return GetBuilder<HomeController>(builder: (ctrl){
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text(
+            'Footwear Store',
+            style: GoogleFonts.bebasNeue(
               color: Colors.black,
               fontWeight: FontWeight.bold,
               letterSpacing: 1.5),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              GetStorage box = GetStorage(); 
-              box.erase(); 
-              Get.offAll(const MySplashScreen());
-            },
-            icon: const Icon(
-              Icons.logout,
-              color: Colors.black,
             ),
-          ),
-        ],
-      ),
-      body: Column(
+          actions: [
+            IconButton(
+              onPressed: () {
+                GetStorage box = GetStorage(); 
+                box.erase(); 
+                Get.offAll(const MySplashScreen());
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
+        body: Column(
         children: [
           SizedBox(
             height: 50,
@@ -127,15 +130,16 @@ class HomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const ProductDescriptionPage()),
-                    );
-                  },
-                );
-              },
-              itemCount: 10, // Make sure to provide itemCount
-            ),
-          )
-        ],
-      ),
-    );
+                      );
+                    },
+                  );
+                },
+                itemCount: 10, // Make sure to provide itemCount
+              ),
+            )
+          ],
+        ),
+      );
+    });
   }
 }

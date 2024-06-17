@@ -5,7 +5,7 @@ import 'package:footwear_client/firebase_options.dart';
 // import 'package:footwear_client/pages/home_page.dart';
 import 'package:footwear_client/pages/splash_screen.dart';
 import 'package:get/get.dart'; 
-
+    
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
