@@ -4,9 +4,11 @@ import 'package:footwear_client/controller/login_controller.dart';
 import 'package:footwear_client/firebase_options.dart';
 // import 'package:footwear_client/pages/home_page.dart';
 import 'package:footwear_client/pages/splash_screen.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart'; 
 
 void main() async {
+  await GetStorage.init(); 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

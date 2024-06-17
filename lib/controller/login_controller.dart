@@ -109,7 +109,7 @@ class LoginController extends GetxController {
             print('5'); 
             loginNumberCtrl.clear();
             print('6'); 
-            Get.to(() =>const HomePage()); 
+            Get.to(() => const HomePage()); 
             // Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green);
             print('7');
           } else {
