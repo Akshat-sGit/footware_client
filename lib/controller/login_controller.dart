@@ -40,6 +40,7 @@ class LoginController extends GetxController {
   void onInit() {
     userCollection = firestore.collection('users');
     super.onInit();
+    print('OnInit Called'); 
   }
 
   void addUser() {

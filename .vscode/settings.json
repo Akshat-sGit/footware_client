@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/Users/akshatagarwal/Flutter/footwear_client/linux"
+    "cmake.sourceDirectory": "/Users/akshatagarwal/Flutter/footwear_client/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
