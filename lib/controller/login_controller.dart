@@ -10,13 +10,13 @@ import 'package:otp_text_field_v2/otp_field_v2.dart';
 class LoginController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference userCollection;
-  
-  GetStorage box = GetStorage(); 
+
+  GetStorage box = GetStorage();
 
   TextEditingController registerNameCtrl = TextEditingController();
   TextEditingController registerNumberCtrl = TextEditingController();
 
-  TextEditingController loginNumberCtrl = TextEditingController(); 
+  TextEditingController loginNumberCtrl = TextEditingController();
 
   OtpFieldControllerV2 otpController = OtpFieldControllerV2();
 
@@ -24,23 +24,25 @@ class LoginController extends GetxController {
   int? otpSend;
   int? otpEntered;
 
- @override
+  @override
   void onReady() {
-    super.onReady(); // Ensure this is called first
-    Map<String, dynamic>? user = box.read('loginUser'); 
-    if(user != null){
-    Future.delayed( const Duration(seconds: 3), () {
-      Get.to(() => const HomePage()); 
-    });
+    
+    Map<String, dynamic>? user = box.read('loginUser');
+    if (user != null) {
+      Future.delayed(const Duration(seconds: 3), () {
+        Get.offAll(() => const HomePage());
+      });
     }
+
   }
+
   @override
   void onInit() {
     userCollection = firestore.collection('users');
     super.onInit();
   }
 
-  addUser() {
+  void addUser() {
     try {
       if (otpSend == otpEntered) {
         DocumentReference doc = userCollection.doc();
@@ -55,8 +57,8 @@ class LoginController extends GetxController {
         registerNameCtrl.clear();
         registerNumberCtrl.clear();
         otpController.clear();
-        otpFieldShown = false; // Reset otpFieldShown after successful registration
-        update(); // Update the state
+        otpFieldShown = false;
+        update();
       } else {
         Get.snackbar('Error', 'OTP is incorrect', colorText: Colors.red);
       }
@@ -65,7 +67,7 @@ class LoginController extends GetxController {
     }
   }
 
-  sendOtp() {
+  void sendOtp() {
     try {
       if (registerNameCtrl.text.isEmpty || registerNumberCtrl.text.isEmpty) {
         Get.snackbar('Error', 'Please fill the fields!', colorText: Colors.red);
@@ -73,15 +75,14 @@ class LoginController extends GetxController {
       }
       final random = Random();
       int otp = 1000 + random.nextInt(9000);
-      // ignore: avoid_print
-      print(otp);
+      // print('Generated OTP: $otp'); // Debugging purpose
       otpFieldShown = true;
       otpSend = otp;
       Get.snackbar('Success', 'Otp sent successfully!, OTP is $otp', colorText: Colors.green);
-      update(); // Update the state
+      update();
     } catch (e) {
-      // ignore: avoid_print
-      print(e);
+      // print(e); // Debugging purpose
+      Get.snackbar('Error', '$e', colorText: Colors.red); 
     }
   }
 
@@ -90,31 +91,30 @@ class LoginController extends GetxController {
   }
 
   Future<void> loginWithPhone() async {
-  try {
-    String phoneNumber = loginNumberCtrl.text.trim(); // Trim any leading or trailing spaces
-    if (phoneNumber.isNotEmpty) {
-      int? phoneNumberParsed = int.tryParse(phoneNumber); // Ensure phone number is parsed correctly
-      if (phoneNumberParsed != null) {
-        var querySnapshot = await userCollection.where('number', isEqualTo: phoneNumberParsed).limit(1).get();  
-        if (querySnapshot.docs.isNotEmpty) {
-          var userDoc = querySnapshot.docs.first; 
-          var userData = userDoc.data() as Map<String, dynamic>;  
-          box.write('loginUser', userData); 
-          loginNumberCtrl.clear(); 
-          Get.to(() => const HomePage()); 
-          Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green); 
+    try {
+      String phoneNumber = loginNumberCtrl.text.trim();
+      if (phoneNumber.isNotEmpty) {
+        int? phoneNumberParsed = int.tryParse(phoneNumber);
+        if (phoneNumberParsed != null) {
+          var querySnapshot = await userCollection.where('number', isEqualTo: phoneNumberParsed).limit(1).get();
+          if (querySnapshot.docs.isNotEmpty) {
+            var userDoc = querySnapshot.docs.first;
+            var userData = userDoc.data() as Map<String, dynamic>;
+            box.write('loginUser', userData);
+            loginNumberCtrl.clear();
+            Get.offAll(() => const HomePage());
+            Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green);
+          } else {
+            Get.snackbar('Error', 'User not found, please register', colorText: Colors.red);
+          }
         } else {
-          Get.snackbar('Error', 'User not found, please register',  colorText: Colors.red);
+          Get.snackbar('Error', 'Invalid phone number', colorText: Colors.red);
         }
       } else {
-        Get.snackbar('Error', 'Invalid phone number', colorText: Colors.red);
+        Get.snackbar('Error', 'Please enter a phone number', colorText: Colors.red);
       }
-    } else {
-      Get.snackbar('Error', 'Please enter a phone number', colorText: Colors.red);
+    } catch (error) {
+      Get.snackbar('Error', 'Failed to login: $error', colorText: Colors.red);
     }
-  } catch (error) {
-    Get.snackbar('Error', 'Failed to login: $error', colorText: Colors.red);  
   }
-}
-
 }

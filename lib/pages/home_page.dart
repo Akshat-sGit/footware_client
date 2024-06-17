@@ -134,7 +134,7 @@ class HomePage extends StatelessWidget {
                   return ProductCard(
                     name: ctrl.products[index].name ?? "No Name",
                     imageUrl: ctrl.products[index].image ?? "URL",
-                    price: (ctrl.products[index].price ?? 0) * 2,
+                    price: ctrl.products[index].price ?? 0,
                     offerTag: 'Yes',
                     onTap: () {
                       Get.to(() => const ProductDescriptionPage());
