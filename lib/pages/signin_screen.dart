@@ -55,17 +55,17 @@ class SignIn extends StatelessWidget {
                   child: Column(
                     children: [
                       // for sign in button
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
+                      SizedBox(
+                        width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
                             // Add product to database
                             ctrl.loginWithPhone();
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: buttonColor,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                           child: Padding(
@@ -74,7 +74,7 @@ class SignIn extends StatelessWidget {
                               "Sign In",
                               style: GoogleFonts.bebasNeue(
                                 color: Colors.white,
-                                fontSize: 16,
+                                fontSize: 25,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
