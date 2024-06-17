@@ -14,9 +14,8 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(builder: (ctrl){
+    return GetBuilder<HomeController>(builder: (ctrl) {
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -25,14 +24,15 @@ class HomePage extends StatelessWidget {
             style: GoogleFonts.bebasNeue(
               color: Colors.black,
               fontWeight: FontWeight.bold,
-              letterSpacing: 1.5),
+              letterSpacing: 1.5,
             ),
+          ),
           actions: [
             IconButton(
               onPressed: () {
-                GetStorage box = GetStorage(); 
-                box.erase(); 
-                Get.offAll(const MySplashScreen());
+                GetStorage box = GetStorage();
+                box.erase();
+                Get.offAll(() => const MySplashScreen());
               },
               icon: const Icon(
                 Icons.logout,
@@ -42,100 +42,107 @@ class HomePage extends StatelessWidget {
           ],
         ),
         body: Column(
-        children: [
-          SizedBox(
-            height: 50,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset:const Offset(0, 2),
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Chip(
-                      shape: RoundedRectangleBorder(
+          children: [
+            SizedBox(
+              height: 50,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                         borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(
-                          color: buttonColor,
-                          width: 1,
+                      ),
+                      child: Chip(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          side: BorderSide(
+                            color: buttonColor,
+                            width: 1,
+                          ),
+                        ),
+                        backgroundColor: buttonColor,
+                        label: Text(
+                          'Category ${index + 1}',
+                          style: GoogleFonts.bebasNeue(
+                              color: Colors.white, fontWeight: FontWeight.w600),
                         ),
                       ),
-                      backgroundColor: buttonColor,
-                      label: Text(
-                        'Category ${index + 1}',
-                        style: GoogleFonts.bebasNeue(color: Colors.white, fontWeight: FontWeight.w600),
-                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Row(
+              children: [
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: DropDown(
+                      dropdownItem: 'Filter Brand',
+                      items: const ['Nike', 'Puma', 'Adidas', 'Skechers'],
+                      selectedItem: 'Sort',
+                      onSelected: (value) {},
                     ),
                   ),
-                );
-              },
+                ),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: DropDown(
+                      dropdownItem: 'Sort',
+                      items: const ['Price: Low to High', 'Price: High to Low'],
+                      selectedItem: 'Sort',
+                      onSelected: (value) {},
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: MultiSelectDropDown(
+                      items: const ['item1', 'item2', 'item3', 'item4'],
+                      onSelectionChanged: (value) {
+                        // ignore: avoid_print
+                        print(value);
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Row(
-            children: [
-              Flexible(
-                child: DropDown(
-                  dropdownItem: 'Filter Brand',
-                  items: const ['Nike', 'Puma', 'Adidas', 'Skechers'],
-                  selectedItem: 'Sort',
-                  onSelected: (value) {},
-                ),
-              ),
-              Flexible(
-                child: DropDown(
-                  dropdownItem: 'Sort',
-                  items: const ['Price: Low to High', 'Price: High to Low'],
-                  selectedItem: 'Sort',
-                  onSelected: (value) {},
-                ),
-              ),
-              Flexible(
-                child: MultiSelectDropDown(
-                  items: const ['item1', 'item2', 'item3', 'item4'],
-                  onSelectionChanged: (value) {
-                    // ignore: avoid_print
-                    print(value);
-                  },
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.8,
                   crossAxisSpacing: 8,
-                  mainAxisSpacing: 8),
-              itemCount: ctrl.products.length,
-              itemBuilder: (context, index) {
-                return ProductCard(
-                  name: ctrl.products[index].name ?? "No Name",
-                  imageUrl: ctrl.products[index].name ?? "URL",
-                  price: ctrl.products[index].price ?? 0,
-                  offerTag: 'Yes',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProductDescriptionPage()),
-                      );
+                  mainAxisSpacing: 8,
+                ),
+                itemCount: ctrl.products.length,
+                itemBuilder: (context, index) {
+                  return ProductCard(
+                    name: ctrl.products[index].name ?? "No Name",
+                    imageUrl: ctrl.products[index].image ?? "URL",
+                    price: (ctrl.products[index].price ?? 0) * 2,
+                    offerTag: 'Yes',
+                    onTap: () {
+                      Get.to(() => const ProductDescriptionPage());
                     },
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
       );
