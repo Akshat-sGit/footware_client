@@ -26,12 +26,10 @@ class LoginController extends GetxController {
 
   @override
   void onReady() {
-    
+    super.onReady(); 
     Map<String, dynamic>? user = box.read('loginUser');
     if (user != null) {
-      Future.delayed(const Duration(seconds: 3), () {
-        Get.offAll(() => const HomePage());
-      });
+     Get.to(() => const HomePage()); 
     }
 
   }
@@ -102,7 +100,7 @@ class LoginController extends GetxController {
             var userData = userDoc.data() as Map<String, dynamic>;
             box.write('loginUser', userData);
             loginNumberCtrl.clear();
-            Get.offAll(() => const HomePage());
+            Get.to(() => const HomePage());
             Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green);
           } else {
             Get.snackbar('Error', 'User not found, please register', colorText: Colors.red);
