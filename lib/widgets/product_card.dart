@@ -64,6 +64,13 @@ class ProductCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
+                    Text(
+                      offerTag, 
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 8, 
+                        color: Colors.green, 
+                      ),
+                    )
                   ],
                 ),
               ),

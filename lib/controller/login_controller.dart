@@ -26,7 +26,7 @@ class LoginController extends GetxController {
 
   @override
   void onReady(){
-    Get.to(const HomePage()); 
+    Get.to(() => const HomePage()); 
   }
 
   @override

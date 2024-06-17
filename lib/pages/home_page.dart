@@ -118,12 +118,12 @@ class HomePage extends StatelessWidget {
                   childAspectRatio: 0.8,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8),
+              itemCount: ctrl.products.length,
               itemBuilder: (context, index) {
                 return ProductCard(
-                  name: 'Nike',
-                  imageUrl:
-                  'https://firebasestorage.googleapis.com/v0/b/ecommerce-66787.appspot.com/o/nike1.jpg?alt=media&token=9f74d9fc-cbcb-4781-b990-c3e637c3be4c',                  
-                  price: 2000.0,
+                  name: ctrl.products[index].name ?? "No Name",
+                  imageUrl: ctrl.products[index].name ?? "URL",
+                  price: ctrl.products[index].price ?? 0,
                   offerTag: 'Yes',
                   onTap: () {
                     Navigator.push(
@@ -134,7 +134,6 @@ class HomePage extends StatelessWidget {
                     },
                   );
                 },
-                itemCount: 10, // Make sure to provide itemCount
               ),
             )
           ],
