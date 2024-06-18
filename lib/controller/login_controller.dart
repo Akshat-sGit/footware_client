@@ -26,21 +26,24 @@ class LoginController extends GetxController {
   int? otpSend;
   int? otpEntered;
 
+  User? loginUser;
+
   @override
-  void onReady() async {
-  super.onReady(); 
+  void onReady() {
+
     Map<String, dynamic>? user = box.read('loginUser');
     if (user != null) {
-     await Get.to(() => const HomePage()); 
+      loginUser = User.fromJson(user); 
+     Get.to(() => const HomePage()); 
     }
-    print("OnReady called"); 
+    super.onReady();
+    // print("OnReady called"); 
   }
 
   @override
   void onInit() {
     userCollection = firestore.collection('users');
     super.onInit();
-    print('OnInit Called'); 
   }
 
   void addUser() {
@@ -110,7 +113,7 @@ class LoginController extends GetxController {
             loginNumberCtrl.clear();
             print('6'); 
             Get.to(() => const HomePage()); 
-            // Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green);
+            Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green);
             print('7');
           } else {
             Get.snackbar('Error', 'User not found, please register', colorText: Colors.red);
