@@ -95,37 +95,41 @@ class LoginController extends GetxController {
   }
 
   Future<void> loginWithPhone() async {
-    try {
-      String phoneNumber = loginNumberCtrl.text.trim();
-      if (phoneNumber.isNotEmpty) {
-        int? phoneNumberParsed = int.tryParse(phoneNumber);
-        print("1"); 
-        if (phoneNumberParsed != null) {
-          var querySnapshot = await userCollection.where('number', isEqualTo: phoneNumberParsed).limit(1).get();
-          print('2'); 
-          if (querySnapshot.docs.isNotEmpty) {
-            var userDoc = querySnapshot.docs.first;
-            print('3'); 
-            var userData = userDoc.data() as Map<String, dynamic>;
-            print('4'); 
+  try {
+    String phoneNumber = loginNumberCtrl.text.trim();
+    if (phoneNumber.isNotEmpty) {
+      int? phoneNumberParsed = int.tryParse(phoneNumber);
+      print("1");
+      if (phoneNumberParsed != null) {
+        var querySnapshot = await userCollection.where('number', isEqualTo: phoneNumberParsed).limit(1).get();
+        print('2');
+        if (querySnapshot.docs.isNotEmpty) {
+          var userDoc = querySnapshot.docs.first;
+          print('3');
+          var userData = userDoc.data() as Map<String, dynamic>?;
+          print('4');
+          if (userData != null) {
             box.write('loginUser', userData);
-            print('5'); 
+            print('5');
             loginNumberCtrl.clear();
-            print('6'); 
-            Get.to(() => const HomePage()); 
+            print('6');
+            Get.to(() => const HomePage());
             Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green);
             print('7');
           } else {
-            Get.snackbar('Error', 'User not found, please register', colorText: Colors.red);
+            Get.snackbar('Error', 'User data is null', colorText: Colors.red);
           }
         } else {
-          Get.snackbar('Error', 'Invalid phone number', colorText: Colors.red);
+          Get.snackbar('Error', 'User not found, please register', colorText: Colors.red);
         }
       } else {
-        Get.snackbar('Error', 'Please enter a phone number', colorText: Colors.red);
+        Get.snackbar('Error', 'Invalid phone number', colorText: Colors.red);
       }
-    } catch (error) {
-      Get.snackbar('Error', 'Failed to login: $error', colorText: Colors.red);
+    } else {
+      Get.snackbar('Error', 'Please enter a phone number', colorText: Colors.red);
+    }
+  } catch (error) {
+    Get.snackbar('Error', 'Failed to login: $error',colorText: Colors.red ); 
     }
   }
 }
