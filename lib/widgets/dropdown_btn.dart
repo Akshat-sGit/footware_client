@@ -25,6 +25,7 @@ class DropDown extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.black,
+            shadowColor: Colors.white,
             elevation: 5,
             padding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(

@@ -21,6 +21,7 @@ class MultiSelectDropDown extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
+            shadowColor: Colors.white,
             backgroundColor: Colors.black,
             elevation: 5,
             padding: const EdgeInsets.all(10),

@@ -93,36 +93,35 @@ class LoginController extends GetxController {
   }
 
   Future<void> loginWithPhone() async {
-  try {
-    String phoneNumber = loginNumberCtrl.text.trim();
-    if (phoneNumber.isNotEmpty) {
-      int? phoneNumberParsed = int.tryParse(phoneNumber);
-      if (phoneNumberParsed != null) {
-        var querySnapshot = await userCollection.where('number', isEqualTo: phoneNumberParsed).limit(1).get();
-        if (querySnapshot.docs.isNotEmpty) {
-          var userDoc = querySnapshot.docs.first;
-          var userData = userDoc.data() as Map<String, dynamic>?;
-          box.write('loginUser', userData);
-          loginNumberCtrl.clear();
-          if (userData != null) {
-            loginUser = User.fromJson(userData);
-            print('User logged in: ${loginUser!.name}'); // Debugging log
-            Get.to(() => HomePage(loginUser: loginUser!));
+    try {
+      String phoneNumber = loginNumberCtrl.text.trim();
+      if (phoneNumber.isNotEmpty) {
+        int? phoneNumberParsed = int.tryParse(phoneNumber);
+        if (phoneNumberParsed != null) {
+          var querySnapshot = await userCollection.where('number', isEqualTo: phoneNumberParsed).limit(1).get();
+          if (querySnapshot.docs.isNotEmpty) {
+            var userDoc = querySnapshot.docs.first;
+            var userData = userDoc.data() as Map<String, dynamic>?;
+            box.write('loginUser', userData);
+            loginNumberCtrl.clear();
+            if (userData != null) {
+              loginUser = User.fromJson(userData);
+              print('User logged in: ${loginUser!.name}'); // Debugging log
+              Get.to(() => HomePage(loginUser: loginUser!));
+            } else {
+              Get.snackbar('Error', 'User data is null', colorText: Colors.red);
+            }
           } else {
-            Get.snackbar('Error', 'User data is null', colorText: Colors.red);
+            Get.snackbar('Error', 'User not found, please register', colorText: Colors.red);
           }
         } else {
-          Get.snackbar('Error', 'User not found, please register', colorText: Colors.red);
+          Get.snackbar('Error', 'Invalid phone number', colorText: Colors.red);
         }
       } else {
-        Get.snackbar('Error', 'Invalid phone number', colorText: Colors.red);
+        Get.snackbar('Error', 'Please enter a phone number', colorText: Colors.red);
       }
-    } else {
-      Get.snackbar('Error', 'Please enter a phone number', colorText: Colors.red);
+    } catch (error) {
+      Get.snackbar('Error', 'Failed to login: $error', colorText: Colors.red);
     }
-  } catch (error) {
-    Get.snackbar('Error', 'Failed to login: $error', colorText: Colors.red);
   }
-}
-
 }

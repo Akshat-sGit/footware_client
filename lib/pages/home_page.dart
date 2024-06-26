@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:footwear_client/controller/home_controller.dart';
 import 'package:footwear_client/model/user/user.dart'; // Ensure you import the User model
@@ -24,12 +26,13 @@ class HomePage extends StatelessWidget {
         print('HomePage built with user: ${loginUser.name}'); // Debugging log
 
         return Scaffold(
+          backgroundColor: Colors.black,
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
             title: Text(
               'Footwear Store',
               style: GoogleFonts.bebasNeue(
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5,
               ),
@@ -43,10 +46,11 @@ class HomePage extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.logout,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ],
+            leading: IconButton(onPressed:() {}, icon: const Icon(Icons.arrow_back_ios, color: Colors.white,)),
           ),
           body: Column(
             children: [
@@ -62,7 +66,7 @@ class HomePage extends StatelessWidget {
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
+                              color: Colors.white.withOpacity(0.3),
                               spreadRadius: 1,
                               blurRadius: 5,
                               offset: const Offset(0, 2),
@@ -152,7 +156,12 @@ class HomePage extends StatelessWidget {
                           price: product.price ?? 0,
                           offerTag: 'Yes',
                           onTap: () {
-                            Get.to(() => const ProductDescriptionPage());
+                            Get.to(() => ProductDescriptionPage(
+                              imageUrl: product.image ?? "URL",
+                              name: product.name ?? "No Name",
+                              description: product.description ?? "No Description", // Pass description
+                              price: product.price ?? 0,
+                            ));
                           },
                         );
                       },

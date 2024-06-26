@@ -2,15 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductDescriptionPage extends StatelessWidget {
-  const ProductDescriptionPage({super.key});
+  final String imageUrl;
+  final String name;
+  final String description;
+  final double price;
+
+  const ProductDescriptionPage({
+    super.key,
+    required this.imageUrl,
+    required this.name,
+    required this.description,
+    required this.price,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: Text(
           "Product Details",
-          style: GoogleFonts.bebasNeue(fontWeight: FontWeight.bold),
+          style: GoogleFonts.bebasNeue(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -21,7 +40,7 @@ class ProductDescriptionPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                'https://firebasestorage.googleapis.com/v0/b/ecommerce-66787.appspot.com/o/nike1.jpg?alt=media&token=9f74d9fc-cbcb-4781-b990-c3e637c3be4c',
+                imageUrl,
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 200,
@@ -29,24 +48,22 @@ class ProductDescriptionPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              "Nike Shoes",
-              style:
-                  GoogleFonts.bebasNeue(fontWeight: FontWeight.bold, fontSize: 25),
+              name,
+              style: GoogleFonts.bebasNeue(fontWeight: FontWeight.bold, fontSize: 25, color: Colors.white),
             ),
             const SizedBox(height: 20),
             Text(
-              "Product Description",
+              description,
+              style: GoogleFonts.bebasNeue(fontSize: 18, color: Colors.white),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              "₹${price.toStringAsFixed(2)}",
               style: GoogleFonts.bebasNeue(
-                fontSize: 18,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
               ),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              "₹3000",
-              style: GoogleFonts.bebasNeue(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green),
             ),
             const SizedBox(height: 20.0),
             TextField(
@@ -63,17 +80,19 @@ class ProductDescriptionPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        side: const BorderSide(color: Colors.black, width: 1))),
+                  backgroundColor: Colors.white,
+                  elevation: 5,
+                  shadowColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: const BorderSide(color: Colors.white, width: 1),
+                  ),
+                ),
                 onPressed: () {},
                 child: Text(
                   'Buy Now',
                   style: GoogleFonts.bebasNeue(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),

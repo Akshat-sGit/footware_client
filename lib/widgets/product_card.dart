@@ -22,7 +22,7 @@ class ProductCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        shadowColor: Colors.black,
+        shadowColor: Colors.white,
         color: Colors.black,
         elevation: 2,
         child: Column(
@@ -47,7 +47,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       name,
                       style: GoogleFonts.bebasNeue(
-                        fontSize: 16,
+                        fontSize: 20,
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
@@ -58,7 +58,8 @@ class ProductCard extends StatelessWidget {
                       '₹${price.toStringAsFixed(2)}',
                       style: GoogleFonts.bebasNeue(
                         color: Colors.white,
-                        fontSize: 10,
+                        fontSize: 17
+                        ,
                         fontWeight: FontWeight.w500,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -67,7 +68,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       offerTag, 
                       style: GoogleFonts.bebasNeue(
-                        fontSize: 8, 
+                        fontSize: 12, 
                         color: Colors.green, 
                       ),
                     )
