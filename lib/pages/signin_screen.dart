@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:footwear_client/controller/login_controller.dart';
 import 'package:footwear_client/pages/register_screen.dart';
@@ -53,6 +55,7 @@ class SignIn extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
+                      print('Sign In button pressed'); // Debugging log
                       ctrl.loginWithPhone();
                     },
                     style: ElevatedButton.styleFrom(

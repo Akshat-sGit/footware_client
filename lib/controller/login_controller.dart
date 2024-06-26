@@ -30,14 +30,14 @@ class LoginController extends GetxController {
 
   @override
   void onReady() {
-
     Map<String, dynamic>? user = box.read('loginUser');
     if (user != null) {
-      loginUser = User.fromJson(user); 
-     Get.to(() => const HomePage()); 
+      loginUser = User.fromJson(user);
+      if (loginUser != null) {
+        Get.to(() => HomePage(loginUser: loginUser!));
+      }
     }
     super.onReady();
-    // print("OnReady called"); 
   }
 
   @override
@@ -79,14 +79,12 @@ class LoginController extends GetxController {
       }
       final random = Random();
       int otp = 1000 + random.nextInt(9000);
-      // print('Generated OTP: $otp'); // Debugging purpose
       otpFieldShown = true;
       otpSend = otp;
       Get.snackbar('Success', 'Otp sent successfully!, OTP is $otp', colorText: Colors.green);
       update();
     } catch (e) {
-      // print(e); // Debugging purpose
-      Get.snackbar('Error', '$e', colorText: Colors.red); 
+      Get.snackbar('Error', '$e', colorText: Colors.red);
     }
   }
 
@@ -99,23 +97,17 @@ class LoginController extends GetxController {
     String phoneNumber = loginNumberCtrl.text.trim();
     if (phoneNumber.isNotEmpty) {
       int? phoneNumberParsed = int.tryParse(phoneNumber);
-      print("1");
       if (phoneNumberParsed != null) {
         var querySnapshot = await userCollection.where('number', isEqualTo: phoneNumberParsed).limit(1).get();
-        print('2');
         if (querySnapshot.docs.isNotEmpty) {
           var userDoc = querySnapshot.docs.first;
-          print('3');
           var userData = userDoc.data() as Map<String, dynamic>?;
-          print('4');
+          box.write('loginUser', userData);
+          loginNumberCtrl.clear();
           if (userData != null) {
-            box.write('loginUser', userData);
-            print('5');
-            loginNumberCtrl.clear();
-            print('6');
-            Get.to(() => const HomePage());
-            Get.snackbar('Success', 'Logged In Successfully', colorText: Colors.green);
-            print('7');
+            loginUser = User.fromJson(userData);
+            print('User logged in: ${loginUser!.name}'); // Debugging log
+            Get.to(() => HomePage(loginUser: loginUser!));
           } else {
             Get.snackbar('Error', 'User data is null', colorText: Colors.red);
           }
@@ -129,7 +121,8 @@ class LoginController extends GetxController {
       Get.snackbar('Error', 'Please enter a phone number', colorText: Colors.red);
     }
   } catch (error) {
-    Get.snackbar('Error', 'Failed to login: $error',colorText: Colors.red ); 
-    }
+    Get.snackbar('Error', 'Failed to login: $error', colorText: Colors.red);
   }
+}
+
 }

@@ -3,35 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:footwear_client/model/product/product.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController{
-  
+class HomeController extends GetxController {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference productCollection;
 
-  List<Product> products = []; 
+  var products = <Product>[].obs; // Using RxList for reactive state
 
   @override
-  Future<void> onInit() async {
+  void onInit() {
     productCollection = firestore.collection('products');
-    await fetchProducts();    
+    fetchProducts();
     super.onInit();
   }
 
-  fetchProducts() async {
+  Future<void> fetchProducts() async {
     try {
       QuerySnapshot productSnapshot = await productCollection.get();
       final List<Product> retrievedProducts = productSnapshot.docs
           .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
-      products.clear();
       products.assignAll(retrievedProducts);
-      Get.snackbar('Succesful', 'Products fetched successfully',
+      Get.snackbar('Successful', 'Products fetched successfully',
           colorText: Colors.green);
     } catch (e) {
       Get.snackbar('Failed', e.toString(), colorText: Colors.red);
-    }finally{
-      update();
     }
   }
-
 }

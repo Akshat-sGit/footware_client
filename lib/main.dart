@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:footwear_client/controller/login_controller.dart';
@@ -8,12 +10,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart'; 
 
 void main() async {
-  await GetStorage.init(); 
+  await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Get.put(LoginController());  // Initialize the controller
+  Get.put(LoginController());
   runApp(const MyApp());
 }
 
