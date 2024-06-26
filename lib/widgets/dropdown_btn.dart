@@ -102,7 +102,7 @@ class DropDown extends StatelessWidget {
               style: GoogleFonts.bebasNeue(
                 color: Colors.white, // Ensure text is visible
                 fontWeight: FontWeight.w500,
-                fontSize: 14, // Increase font size for better readability
+                fontSize: 16, // Increase font size for better readability
               ),
             ),
           ),

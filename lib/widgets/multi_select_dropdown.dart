@@ -101,7 +101,7 @@ class MultiSelectDropDown extends StatelessWidget {
               overflow: TextOverflow.clip,
               style: GoogleFonts.bebasNeue(
                 color: Colors.white,
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
             ),

@@ -64,7 +64,8 @@ class HomePage extends StatelessWidget {
                 height: 50,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 5,
+                  itemCount: ctrl.productCategory.length,
+                  // itemCount: 5,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(6.0),
@@ -72,9 +73,8 @@ class HomePage extends StatelessWidget {
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.white.withOpacity(0.3),
+                              color:  buttonColor,
                               spreadRadius: 1,
-                              blurRadius: 5,
                               offset: const Offset(0, 2),
                             ),
                           ],
@@ -90,9 +90,10 @@ class HomePage extends StatelessWidget {
                           ),
                           backgroundColor: buttonColor,
                           label: Text(
-                            'Category ${index + 1}',
+                            ctrl.productCategory[index].name ?? "Error" , 
                             style: GoogleFonts.bebasNeue(
                               color: Colors.white,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
