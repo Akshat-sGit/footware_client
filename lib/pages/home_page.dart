@@ -37,6 +37,7 @@ class HomePage extends StatelessWidget {
                 letterSpacing: 1.5,
               ),
             ),
+            centerTitle: true,
             actions: [
               IconButton(
                 onPressed: () {
@@ -50,7 +51,12 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ],
-            leading: IconButton(onPressed:() {}, icon: const Icon(Icons.arrow_back_ios, color: Colors.white,)),
+            leading: IconButton(onPressed:() {},
+             icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+              )
+            ),
           ),
           body: Column(
             children: [
@@ -87,7 +93,7 @@ class HomePage extends StatelessWidget {
                             'Category ${index + 1}',
                             style: GoogleFonts.bebasNeue(
                               color: Colors.white,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),

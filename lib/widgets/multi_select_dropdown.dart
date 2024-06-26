@@ -102,7 +102,7 @@ class MultiSelectDropDown extends StatelessWidget {
               style: GoogleFonts.bebasNeue(
                 color: Colors.white,
                 fontSize: 14,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),

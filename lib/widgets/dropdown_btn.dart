@@ -101,7 +101,7 @@ class DropDown extends StatelessWidget {
               overflow: TextOverflow.clip,
               style: GoogleFonts.bebasNeue(
                 color: Colors.white, // Ensure text is visible
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
                 fontSize: 14, // Increase font size for better readability
               ),
             ),
