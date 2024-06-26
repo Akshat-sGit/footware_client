@@ -9,18 +9,18 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference productCollection;
-  late CollectionReference categoryCollection; 
+  late CollectionReference categoryCollection;
 
-  var products = <Product>[].obs; 
-  var productCategory = <ProductCategory>[].obs; 
-
+  var products = <Product>[].obs;
+  var productCategory = <ProductCategory>[].obs;
+  var productShowInUI = <Product>[].obs;
 
   @override
-  void onInit()  async {
+  void onInit() {
     productCollection = firestore.collection('products');
-    categoryCollection = firestore.collection('category'); 
-    await fetchCategory(); 
-    await fetchProducts();
+    categoryCollection = firestore.collection('category');
+    fetchCategory();
+    fetchProducts();
     super.onInit();
   }
 
@@ -30,8 +30,8 @@ class HomeController extends GetxController {
       final List<Product> retrievedProducts = productSnapshot.docs
           .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
-      products.clear(); 
       products.assignAll(retrievedProducts);
+      productShowInUI.assignAll(retrievedProducts);
       Get.snackbar('Successful', 'Products fetched successfully',
           colorText: Colors.green);
     } catch (e) {
@@ -39,23 +39,25 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> fetchCategory() async{
+  Future<void> fetchCategory() async {
     try {
       QuerySnapshot categorySnapshot = await categoryCollection.get();
       final List<ProductCategory> retrievedCategories = categorySnapshot.docs
           .map((doc) => ProductCategory.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
-      productCategory.clear(); 
       productCategory.assignAll(retrievedCategories);
       Get.snackbar('Successful', 'Category fetched successfully',
           colorText: Colors.green);
-      print(productCategory.length); 
+      print(productCategory.length);
     } catch (e) {
       Get.snackbar('Failed', e.toString(), colorText: Colors.red);
     }
-
   }
 
-
-
+  void filterByCategory(String category) {
+    var filteredProducts = products.where((product) => product.category == category).toList();
+    productShowInUI.assignAll(filteredProducts);
+    update();
+    print('product length is : ${productShowInUI.length}');
+  }
 }

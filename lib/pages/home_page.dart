@@ -62,46 +62,52 @@ class HomePage extends StatelessWidget {
             children: [
               SizedBox(
                 height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: ctrl.productCategory.length,
-                  // itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color:  buttonColor,
-                              spreadRadius: 1,
-                              offset: const Offset(0, 2),
+                child: Obx(() {
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: ctrl.productCategory.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          ctrl.filterByCategory(ctrl.productCategory[index].name ?? '');
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: buttonColor,
+                                  spreadRadius: 1,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Chip(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            side: BorderSide(
-                              color: buttonColor,
-                              width: 1,
+                            child: Chip(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                side: BorderSide(
+                                  color: buttonColor,
+                                  width: 1,
+                                ),
+                              ),
+                              backgroundColor: buttonColor,
+                              label: Text(
+                                ctrl.productCategory[index].name ?? "Error",
+                                style: GoogleFonts.bebasNeue(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                             ),
                           ),
-                          backgroundColor: buttonColor,
-                          label: Text(
-                            ctrl.productCategory[index].name ?? "Error" , 
-                            style: GoogleFonts.bebasNeue(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  );
+                }),
               ),
               Row(
                 children: [
@@ -142,7 +148,7 @@ class HomePage extends StatelessWidget {
               ),
               Expanded(
                 child: Obx(() {
-                  if (ctrl.products.isEmpty) {
+                  if (ctrl.productShowInUI.isEmpty) {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
@@ -154,9 +160,9 @@ class HomePage extends StatelessWidget {
                         crossAxisSpacing: 8,
                         mainAxisSpacing: 8,
                       ),
-                      itemCount: ctrl.products.length,
+                      itemCount: ctrl.productShowInUI.length,
                       itemBuilder: (context, index) {
-                        final product = ctrl.products[index];
+                        final product = ctrl.productShowInUI[index];
                         return ProductCard(
                           name: product.name ?? "No Name",
                           imageUrl: product.image ?? "URL",

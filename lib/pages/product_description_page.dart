@@ -25,6 +25,7 @@ class ProductDescriptionPage extends StatelessWidget {
           "Product Details",
           style: GoogleFonts.bebasNeue(fontWeight: FontWeight.bold, color: Colors.white),
         ),
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
