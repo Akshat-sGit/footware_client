@@ -14,7 +14,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
-  final User loginUser;
+  final User? loginUser;
 
   const HomePage({super.key, required this.loginUser});
 
@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (ctrl) {
-        print('HomePage built with user: ${loginUser.name}'); 
+        print('HomePage built with user: ${loginUser?.name}'); 
 
         return Scaffold(
           backgroundColor: Colors.black,
