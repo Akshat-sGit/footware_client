@@ -27,7 +27,7 @@ class ProductCard extends StatelessWidget {
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
-          side: BorderSide(color: buttonColor, width: 3), 
+          side: const BorderSide(color: Colors.white, width: 3), 
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(5),
