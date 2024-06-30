@@ -1,16 +1,22 @@
-# footwear_client
+# FootWear Store
 
-A new Flutter project.
+# Description
+Step into style with our Flutter-built footwear app! Seamlessly browse, select, and purchase the latest shoe trends with ease. Powered by GetX state management and Firebase, enjoy a smooth, responsive shopping experience. Find your perfect pair today!
 
-## Getting Started
+# Tech Stack Used: 
+Flutter, Dart, Getx State, Rest API
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Screenshots
+### SPLASH SCREEN
+![SplashScreen](https://github.com/Akshat-sGit/footware_client/assets/99307359/ec3c21dd-d096-43ac-9e76-4fe169cf5c93)
+### REGISTRATION SCREEN
+![Register](https://github.com/Akshat-sGit/footware_client/assets/99307359/06fbb74d-d152-400a-8019-fdde7b20d4f0)
+### SIGNIN SCREEN
+![sigin](https://github.com/Akshat-sGit/footware_client/assets/99307359/d9dad2c7-68ce-4c42-9bc9-7b1d1b9867d5)
+### HOMESCREEN
+![homescreen](https://github.com/Akshat-sGit/footware_client/assets/99307359/a80c67c0-e0db-4f8e-acb1-09770b1eb7e4)
+### PRODUCT SCREEN
+![product](https://github.com/Akshat-sGit/footware_client/assets/99307359/be086f1a-251a-48bb-8e5b-23999168c591)
+### PAYMENT GATEWAY
+![payment](https://github.com/Akshat-sGit/footware_client/assets/99307359/08f3852f-a0a1-4d68-a27e-5ff028a9c57e)
+![paymentSuccess](https://github.com/Akshat-sGit/footware_client/assets/99307359/18e385ec-5dc5-4c58-b008-5e25cae2714a)
