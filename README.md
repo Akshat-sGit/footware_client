@@ -6,6 +6,17 @@ Step into style with our Flutter-built footwear app! Seamlessly browse, select, 
 ## Tech Stack Used: 
 Flutter, Dart, Getx State, Rest API
 
+
+## How to run 
+
+1. Installation 
+```https://github.com/Akshat-sGit/Weather.git```
+```cd Weather``` 
+2. Install Dependencies 
+``` flutter pub get ```  
+3. Run the Application 
+``` flutter run ``` 
+
 ## Screenshots
 
 ### SPLASH SCREEN
