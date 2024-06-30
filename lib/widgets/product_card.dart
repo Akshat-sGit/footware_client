@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:footwear_client/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductCard extends StatelessWidget {
