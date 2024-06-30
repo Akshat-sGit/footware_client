@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:footwear_client/controller/purchase_controller.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductDescriptionPage extends StatelessWidget {
@@ -17,6 +19,7 @@ class ProductDescriptionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return GetBuilder<PurchaseController>(builder: (ctrl){
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -68,13 +71,16 @@ class ProductDescriptionPage extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
             TextField(
+              controller: ctrl.addressController,
               maxLines: 3,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(22),
                 ),
                 labelText: "Enter your billing address",
+                labelStyle: GoogleFonts.bebasNeue()
               ),
+              style:const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 20),
             SizedBox(
@@ -89,7 +95,9 @@ class ProductDescriptionPage extends StatelessWidget {
                     side: const BorderSide(color: Colors.white, width: 1),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  ctrl.submitOrder(price: price , item: name, description: description); 
+                },
                 child: Text(
                   'Buy Now',
                   style: GoogleFonts.bebasNeue(
@@ -104,5 +112,6 @@ class ProductDescriptionPage extends StatelessWidget {
         ),
       ),
     );
+    }); 
   }
 }

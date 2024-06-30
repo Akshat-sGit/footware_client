@@ -2,7 +2,9 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:footwear_client/controller/home_controller.dart';
 import 'package:footwear_client/controller/login_controller.dart';
+import 'package:footwear_client/controller/purchase_controller.dart';
 import 'package:footwear_client/firebase_options.dart';
 // import 'package:footwear_client/pages/home_page.dart';
 import 'package:footwear_client/pages/splash_screen.dart';
@@ -16,6 +18,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Get.put(LoginController());
+  Get.put(HomeController());
+  Get.put(PurchaseController()); 
   runApp(const MyApp());
 }
 
