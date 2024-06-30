@@ -1,12 +1,13 @@
 # FootWear Store
 
-# Description
+## Description
 Step into style with our Flutter-built footwear app! Seamlessly browse, select, and purchase the latest shoe trends with ease. Powered by GetX state management and Firebase, enjoy a smooth, responsive shopping experience. Find your perfect pair today!
 
-# Tech Stack Used: 
+## Tech Stack Used: 
 Flutter, Dart, Getx State, Rest API
 
-# Screenshots
+## Screenshots
+
 ### SPLASH SCREEN
 ![SplashScreen](https://github.com/Akshat-sGit/footware_client/assets/99307359/ec3c21dd-d096-43ac-9e76-4fe169cf5c93)
 ### REGISTRATION SCREEN
