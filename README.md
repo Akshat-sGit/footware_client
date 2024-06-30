@@ -10,8 +10,8 @@ Flutter, Dart, Getx State, Rest API
 ## How to run 
 
 1. Installation 
-```https://github.com/Akshat-sGit/Weather.git```
-```cd Weather``` 
+```https://github.com/Akshat-sGit/footwear_client.git```
+```cd footwear_client``` 
 2. Install Dependencies 
 ``` flutter pub get ```  
 3. Run the Application 
