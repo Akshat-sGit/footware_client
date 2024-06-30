@@ -1,4 +1,4 @@
-# FootWear Store
+# FOOTWEAR STORE
 
 ## Description
 Step into style with our Flutter-built footwear app! Seamlessly browse, select, and purchase the latest shoe trends with ease. Powered by GetX state management and Firebase, enjoy a smooth, responsive shopping experience. Find your perfect pair today!
