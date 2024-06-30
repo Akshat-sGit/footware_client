@@ -68,6 +68,7 @@ class DropDown extends StatelessWidget {
                           itemExtent: 40,
                           onSelectedItemChanged: (int index) {
                             onSelected(items[index]);
+                            print(items[index]); 
                           },
                           backgroundColor:
                               Colors.white, // Set picker background to white

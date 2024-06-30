@@ -60,4 +60,23 @@ class HomeController extends GetxController {
     update();
     print('product length is : ${productShowInUI.length}');
   }
+
+  void filterByBrand(List<String> brands) {
+    if (brands.isEmpty) {
+      productShowInUI.assignAll(products);
+    } else {
+      List<String> lowerCaseBrands = brands.map((brand) => brand.toLowerCase()).toList();
+      var filteredProducts = products.where((product) => lowerCaseBrands.contains(product.brand?.toLowerCase())).toList();
+      productShowInUI.assignAll(filteredProducts);
+    }
+    update();
+    print('Filtered products count: ${productShowInUI.length}');
+  }
+
+  void sortByPrice({required bool ascending}) {
+    List<Product> sortedProducts = List<Product>.from(productShowInUI);
+    sortedProducts.sort((a, b) => ascending ? a.price!.compareTo(b.price!) : b.price!.compareTo(a.price!));
+    productShowInUI.assignAll(sortedProducts); 
+    update();
+  }
 }

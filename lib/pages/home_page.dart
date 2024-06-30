@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:footwear_client/controller/home_controller.dart';
-import 'package:footwear_client/model/user/user.dart'; // Ensure you import the User model
+import 'package:footwear_client/model/user/user.dart'; 
 import 'package:footwear_client/pages/product_description_page.dart';
 import 'package:footwear_client/pages/splash_screen.dart';
 import 'package:footwear_client/utils/colors.dart';
@@ -21,9 +21,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      init: HomeController(), // Initialize HomeController
+      init: HomeController(),
       builder: (ctrl) {
-        print('HomePage built with user: ${loginUser.name}'); // Debugging log
+        print('HomePage built with user: ${loginUser.name}'); 
 
         return Scaffold(
           backgroundColor: Colors.black,
@@ -51,7 +51,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ],
-            leading: IconButton(onPressed:() {},
+            leading: IconButton(onPressed:() {
+              Navigator.pop(context);
+            },
              icon: const Icon(
               Icons.arrow_back_ios,
               color: Colors.white,
@@ -114,11 +116,12 @@ class HomePage extends StatelessWidget {
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
-                      child: DropDown(
-                        dropdownItem: 'Filter Brand',
+                      child: MultiSelectDropDown(
+                        name: "Brand", 
                         items: const ['Nike', 'Puma', 'Adidas', 'Skechers'],
-                        selectedItem: 'Sort',
-                        onSelected: (value) {},
+                        onSelectionChanged: (value) {
+                          ctrl.filterByBrand(value);
+                        },
                       ),
                     ),
                   ),
@@ -129,17 +132,8 @@ class HomePage extends StatelessWidget {
                         dropdownItem: 'Sort',
                         items: const ['Price: Low to High', 'Price: High to Low'],
                         selectedItem: 'Sort',
-                        onSelected: (value) {},
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: MultiSelectDropDown(
-                        items: const ['item1', 'item2', 'item3', 'item4'],
-                        onSelectionChanged: (value) {
-                          print(value);
+                        onSelected: (value) {
+                          ctrl.sortByPrice(ascending: value == 'Price: Low to High' ? true : false); 
                         },
                       ),
                     ),

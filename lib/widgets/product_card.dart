@@ -23,13 +23,13 @@ class ProductCard extends StatelessWidget {
       onTap: onTap,
       child: Card(
         shadowColor: Colors.white,
-        color: Colors.black,
+        color: Colors.white,
         elevation: 2,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0), 
               child: Image.network(
                 imageUrl,
                 fit: BoxFit.fitWidth,
@@ -48,7 +48,7 @@ class ProductCard extends StatelessWidget {
                       name,
                       style: GoogleFonts.bebasNeue(
                         fontSize: 20,
-                        color: Colors.white,
+                        color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -57,7 +57,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       '₹${price.toStringAsFixed(2)}',
                       style: GoogleFonts.bebasNeue(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 17
                         ,
                         fontWeight: FontWeight.w500,
