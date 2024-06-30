@@ -9,7 +9,7 @@ Flutter, Dart, Getx State, Rest API
 ## Screenshots
 
 ### SPLASH SCREEN
-![SplashScreen](https://github.com/Akshat-sGit/footware_client/assets/99307359/ec3c21dd-d096-43ac-9e76-4fe169cf5c93)
+![SplashScreen](https://github.com/Akshat-sGit/footware_client/assets/99307359/ec3c21dd-d096-43ac-9e76-4fe169cf5c93 =100x20)
 ### REGISTRATION SCREEN
 ![Register](https://github.com/Akshat-sGit/footware_client/assets/99307359/06fbb74d-d152-400a-8019-fdde7b20d4f0)
 ### SIGNIN SCREEN
