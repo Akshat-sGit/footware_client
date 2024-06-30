@@ -22,61 +22,66 @@ class ProductCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        shadowColor: Colors.white,
-        color: Colors.white,
+        color: Colors.black,
         elevation: 2,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0), 
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.fitWidth,
-                width: double.maxFinite,
-                height: 150,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name,
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                    Text(
-                      '₹${price.toStringAsFixed(2)}',
-                      style: GoogleFonts.bebasNeue(
-                        color: Colors.black,
-                        fontSize: 17
-                        ,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                    Text(
-                      offerTag, 
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 12, 
-                        color: Colors.green, 
-                      ),
-                    )
-                  ],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+          side:const BorderSide(color: Colors.white, width: 1), 
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.fitWidth,
+                  width: double.maxFinite,
+                  height: 150,
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 2),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        name,
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      Text(
+                        '₹${price.toStringAsFixed(2)}',
+                        style: GoogleFonts.bebasNeue(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      Text(
+                        offerTag,
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 12,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
