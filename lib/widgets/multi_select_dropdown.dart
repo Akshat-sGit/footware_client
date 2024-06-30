@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 List<String> selectedItems = [];
 
 class MultiSelectDropDown extends StatelessWidget {
+  final String name;
   final List<String> items;
   final Function(List<String>) onSelectionChanged;
 
@@ -11,6 +12,7 @@ class MultiSelectDropDown extends StatelessWidget {
     super.key,
     required this.items,
     required this.onSelectionChanged,
+    required this.name
   });
 
   @override
@@ -21,6 +23,7 @@ class MultiSelectDropDown extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
+            shadowColor: Colors.white,
             backgroundColor: Colors.black,
             elevation: 5,
             padding: const EdgeInsets.all(10),
@@ -39,7 +42,7 @@ class MultiSelectDropDown extends StatelessWidget {
               builder: (BuildContext context) {
                 return StatefulBuilder(
                   builder: (BuildContext context, StateSetter setState) {
-                    return Container(
+                    return Container( 
                       padding: const EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -56,6 +59,7 @@ class MultiSelectDropDown extends StatelessWidget {
                                     ? selectedItems.remove(item)
                                     : selectedItems.add(item);
                                 onSelectionChanged(selectedItems);
+                                print(selectedItems);
                               });
                             },
                             child: Container(
@@ -94,14 +98,14 @@ class MultiSelectDropDown extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: Text(
-              selectedItems.isEmpty ? 'Select Items' : selectedItems.join(', '),
+              name, 
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.clip,
               style: GoogleFonts.bebasNeue(
                 color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),

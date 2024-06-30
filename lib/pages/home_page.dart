@@ -1,6 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:footwear_client/controller/home_controller.dart';
-import 'package:footwear_client/model/user/user.dart'; // Ensure you import the User model
+import 'package:footwear_client/model/user/user.dart'; 
 import 'package:footwear_client/pages/product_description_page.dart';
 import 'package:footwear_client/pages/splash_screen.dart';
 import 'package:footwear_client/utils/colors.dart';
@@ -19,21 +21,23 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      init: HomeController(), // Initialize HomeController
+      init: HomeController(),
       builder: (ctrl) {
-        print('HomePage built with user: ${loginUser.name}'); // Debugging log
+        print('HomePage built with user: ${loginUser.name}'); 
 
         return Scaffold(
+          backgroundColor: Colors.black,
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
             title: Text(
               'Footwear Store',
               style: GoogleFonts.bebasNeue(
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5,
               ),
             ),
+            centerTitle: true,
             actions: [
               IconButton(
                 onPressed: () {
@@ -43,65 +47,81 @@ class HomePage extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.logout,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ],
+            leading: IconButton(onPressed:() {
+              Navigator.pop(context);
+            },
+             icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+              )
+            ),
           ),
           body: Column(
             children: [
               SizedBox(
                 height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              spreadRadius: 1,
-                              blurRadius: 5,
-                              offset: const Offset(0, 2),
+                child: Obx(() {
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: ctrl.productCategory.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          ctrl.filterByCategory(ctrl.productCategory[index].name ?? '');
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: buttonColor,
+                                  spreadRadius: 1,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Chip(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            side: BorderSide(
-                              color: buttonColor,
-                              width: 1,
+                            child: Chip(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                side: BorderSide(
+                                  color: buttonColor,
+                                  width: 1,
+                                ),
+                              ),
+                              backgroundColor: buttonColor,
+                              label: Text(
+                                ctrl.productCategory[index].name ?? "Error",
+                                style: GoogleFonts.bebasNeue(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                             ),
                           ),
-                          backgroundColor: buttonColor,
-                          label: Text(
-                            'Category ${index + 1}',
-                            style: GoogleFonts.bebasNeue(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  );
+                }),
               ),
               Row(
                 children: [
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
-                      child: DropDown(
-                        dropdownItem: 'Filter Brand',
+                      child: MultiSelectDropDown(
+                        name: "Brand", 
                         items: const ['Nike', 'Puma', 'Adidas', 'Skechers'],
-                        selectedItem: 'Sort',
-                        onSelected: (value) {},
+                        onSelectionChanged: (value) {
+                          ctrl.filterByBrand(value);
+                        },
                       ),
                     ),
                   ),
@@ -112,17 +132,8 @@ class HomePage extends StatelessWidget {
                         dropdownItem: 'Sort',
                         items: const ['Price: Low to High', 'Price: High to Low'],
                         selectedItem: 'Sort',
-                        onSelected: (value) {},
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: MultiSelectDropDown(
-                        items: const ['item1', 'item2', 'item3', 'item4'],
-                        onSelectionChanged: (value) {
-                          print(value);
+                        onSelected: (value) {
+                          ctrl.sortByPrice(ascending: value == 'Price: Low to High' ? true : false); 
                         },
                       ),
                     ),
@@ -131,7 +142,7 @@ class HomePage extends StatelessWidget {
               ),
               Expanded(
                 child: Obx(() {
-                  if (ctrl.products.isEmpty) {
+                  if (ctrl.productShowInUI.isEmpty) {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
@@ -143,16 +154,21 @@ class HomePage extends StatelessWidget {
                         crossAxisSpacing: 8,
                         mainAxisSpacing: 8,
                       ),
-                      itemCount: ctrl.products.length,
+                      itemCount: ctrl.productShowInUI.length,
                       itemBuilder: (context, index) {
-                        final product = ctrl.products[index];
+                        final product = ctrl.productShowInUI[index];
                         return ProductCard(
                           name: product.name ?? "No Name",
                           imageUrl: product.image ?? "URL",
                           price: product.price ?? 0,
                           offerTag: 'Yes',
                           onTap: () {
-                            Get.to(() => const ProductDescriptionPage());
+                            Get.to(() => ProductDescriptionPage(
+                              imageUrl: product.image ?? "URL",
+                              name: product.name ?? "No Name",
+                              description: product.description ?? "No Description", // Pass description
+                              price: product.price ?? 0,
+                            ));
                           },
                         );
                       },

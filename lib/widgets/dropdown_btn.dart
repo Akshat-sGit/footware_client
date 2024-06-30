@@ -25,6 +25,7 @@ class DropDown extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.black,
+            shadowColor: Colors.white,
             elevation: 5,
             padding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
@@ -67,6 +68,7 @@ class DropDown extends StatelessWidget {
                           itemExtent: 40,
                           onSelectedItemChanged: (int index) {
                             onSelected(items[index]);
+                            print(items[index]); 
                           },
                           backgroundColor:
                               Colors.white, // Set picker background to white
@@ -100,8 +102,8 @@ class DropDown extends StatelessWidget {
               overflow: TextOverflow.clip,
               style: GoogleFonts.bebasNeue(
                 color: Colors.white, // Ensure text is visible
-                fontWeight: FontWeight.w600,
-                fontSize: 14, // Increase font size for better readability
+                fontWeight: FontWeight.w500,
+                fontSize: 16, // Increase font size for better readability
               ),
             ),
           ),
