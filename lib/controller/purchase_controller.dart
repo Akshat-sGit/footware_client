@@ -14,7 +14,7 @@ class PurchaseController extends GetxController{
 
   TextEditingController addressController = TextEditingController();
 
-  double orderPrice = 0; 
+  double orderPrice = 0;    
   String itemName = ''; 
   String orderAddress = ''; 
 
@@ -35,7 +35,7 @@ class PurchaseController extends GetxController{
       'key': 'rzp_test_QPidmdfhhPid4U',
       'amount': price * 100,
       'name': item,
-      'description': description,
+      // 'description': description,
       };
 
     void _handlePaymentSuccess(PaymentSuccessResponse response) {

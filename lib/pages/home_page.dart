@@ -26,13 +26,13 @@ class HomePage extends StatelessWidget {
         print('HomePage built with user: ${loginUser?.name}'); 
 
         return Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.white,
           appBar: AppBar(
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.white,
             title: Text(
               'Footwear Store',
               style: GoogleFonts.bebasNeue(
-                color: Colors.white,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5,
               ),
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.logout,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ],

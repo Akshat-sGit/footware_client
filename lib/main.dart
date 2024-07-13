@@ -6,7 +6,6 @@ import 'package:footwear_client/controller/home_controller.dart';
 import 'package:footwear_client/controller/login_controller.dart';
 import 'package:footwear_client/controller/purchase_controller.dart';
 import 'package:footwear_client/firebase_options.dart';
-// import 'package:footwear_client/pages/home_page.dart';
 import 'package:footwear_client/pages/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart'; 
