@@ -32,52 +32,47 @@ class ProductCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              // Image section
+              AspectRatio(
+                aspectRatio: 3/2, // Adjust the aspect ratio as needed
                 child: Image.network(
                   imageUrl,
-                  fit: BoxFit.fitWidth,
-                  width: double.maxFinite,
-                  height: 150,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
               ),
-              const SizedBox(height: 2),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        style: GoogleFonts.bebasNeue(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
+              const SizedBox(height: 8), // Space between image and text
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Product name
+                    Text(
+                      name,
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
                       ),
-                      Text(
-                        '₹${price.toStringAsFixed(2)}',
-                        style: GoogleFonts.bebasNeue(
-                          color: Colors.black,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    // Price
+                    Text(
+                      '₹${price.toStringAsFixed(2)}',
+                      style: GoogleFonts.bebasNeue(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
                       ),
-                      Text(
-                        offerTag,
-                        style: GoogleFonts.bebasNeue(
-                          fontSize: 12,
-                          color: Colors.green,
-                        ),
-                      ),
-                    ],
-                  ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ],
                 ),
               ),
             ],
