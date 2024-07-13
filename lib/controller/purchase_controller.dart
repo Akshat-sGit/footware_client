@@ -65,6 +65,7 @@ class PurchaseController extends GetxController{
       ); 
     }
   
+    // ignore: unused_element
     Future<void> orderSuccess({required String? transactionId}) async {
 
       User? loginUse = Get.find<LoginController>().loginUser; 
