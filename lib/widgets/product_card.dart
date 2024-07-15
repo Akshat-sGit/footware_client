@@ -22,16 +22,16 @@ class ProductCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        color: Colors.white,
+        color: Colors.black,
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
-          side: const BorderSide(color: Colors.white, width: 3), 
+          side: const BorderSide(color: Colors.white, width: 2), 
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(5),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Image section
@@ -39,23 +39,24 @@ class ProductCard extends StatelessWidget {
                 aspectRatio: 3/2, // Adjust the aspect ratio as needed
                 child: Image.network(
                   imageUrl,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitWidth,
                   width: double.infinity,
                 ),
+                
               ),
               const SizedBox(height: 8), // Space between image and text
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     // Product name
                     Text(
                       name,
                       style: GoogleFonts.bebasNeue(
                         fontSize: 20,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -65,7 +66,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       '₹${price.toStringAsFixed(2)}',
                       style: GoogleFonts.bebasNeue(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),

@@ -26,13 +26,13 @@ class HomePage extends StatelessWidget {
         print('HomePage built with user: ${loginUser?.name}'); 
 
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.black,
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
             title: Text(
               'Footwear Store',
               style: GoogleFonts.bebasNeue(
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5,
               ),
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.logout,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ],
@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
             },
              icon: const Icon(
               Icons.arrow_back_ios,
-              color: Colors.black,
+              color: Colors.white,
               )
             ),
           ),
@@ -77,11 +77,12 @@ class HomePage extends StatelessWidget {
                           padding: const EdgeInsets.all(6.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              boxShadow: [
+                              boxShadow:  [
                                 BoxShadow(
                                   color: buttonColor,
-                                  spreadRadius: 1,
-                                  offset: const Offset(0, 2),
+                                  spreadRadius: 0.5,
+                                  offset: const Offset(1, 0.5),
+                                  blurRadius: 2,
                                 ),
                               ],
                               borderRadius: BorderRadius.circular(20),
@@ -89,9 +90,9 @@ class HomePage extends StatelessWidget {
                             child: Chip(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                side: BorderSide(
-                                  color: buttonColor,
-                                  width: 1,
+                                side:const BorderSide(
+                                  color: Colors.white,
+                                  width: 1.5,
                                 ),
                               ),
                               backgroundColor: buttonColor,

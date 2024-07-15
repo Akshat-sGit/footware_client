@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:footwear_client/controller/purchase_controller.dart';
+import 'package:footwear_client/utils/colors.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,15 +24,15 @@ class ProductDescriptionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PurchaseController>(builder: (ctrl) {
       return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.black,
           elevation: 0,
           title: Text(
             "Product Details",
             style: GoogleFonts.bebasNeue(
               fontWeight: FontWeight.bold, 
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           centerTitle: true,
@@ -39,7 +40,7 @@ class ProductDescriptionPage extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
           ),
         ),
         body: Padding(
@@ -67,13 +68,13 @@ class ProductDescriptionPage extends StatelessWidget {
                         style: GoogleFonts.bebasNeue(
                           fontWeight: FontWeight.bold, 
                           fontSize: 28, 
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                       const SizedBox(height: 20),
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.transparent,
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: ClipRRect(
@@ -134,7 +135,7 @@ class ProductDescriptionPage extends StatelessWidget {
                           ),
                           labelText: "Enter your billing address",
                           labelStyle: GoogleFonts.bebasNeue(
-                            color: Colors.black54,
+                            color: Colors.white54,
                           ),
                         ),
                         style: const TextStyle(color: Colors.black),
@@ -154,7 +155,7 @@ class ProductDescriptionPage extends StatelessWidget {
                       style: GoogleFonts.bebasNeue(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                     Text(
@@ -172,7 +173,7 @@ class ProductDescriptionPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
+                    backgroundColor: Colors.white,
                     elevation: 5,
                     shadowColor: Colors.black,
                     shape: RoundedRectangleBorder(
@@ -186,7 +187,7 @@ class ProductDescriptionPage extends StatelessWidget {
                   child: Text(
                     'Buy Now',
                     style: GoogleFonts.bebasNeue(
-                      color: Colors.white,
+                      color: buttonColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
