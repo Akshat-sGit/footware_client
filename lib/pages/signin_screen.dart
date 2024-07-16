@@ -18,7 +18,7 @@ class SignIn extends StatelessWidget {
     return GetBuilder<LoginController>(builder: (ctrl) {
       return Scaffold(
         body: Container(
-          color: Colors.white,
+          color: Colors.black,
           child: SafeArea(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -30,7 +30,7 @@ class SignIn extends StatelessWidget {
                   style: GoogleFonts.bebasNeue(
                     fontWeight: FontWeight.bold,
                     fontSize: 37,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -84,7 +84,7 @@ class SignIn extends StatelessWidget {
                     Container(
                       height: 2,
                       width: size.width * 0.2,
-                      color: Colors.black12,
+                      color: Colors.white12,
                     ),
                     Text(
                       "  Or continue with   ",
@@ -97,7 +97,7 @@ class SignIn extends StatelessWidget {
                     Container(
                       height: 2,
                       width: size.width * 0.2,
-                      color: Colors.black12,
+                      color: Colors.white12,
                     ),
                   ],
                 ),
@@ -107,11 +107,31 @@ class SignIn extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: socialIcon("images/google.png"),
+                      child: Container(
+                        padding: const EdgeInsets.all(5.0), 
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 2.0,
+                            ),
+                          borderRadius: BorderRadius.circular(5.0),
+                          ), 
+                        child: socialIcon("images/google.png")
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: socialIcon("images/facebook.png"),
+                      child: Container(
+                        padding: const EdgeInsets.all(5.0), 
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 2.0,
+                            ),
+                          borderRadius: BorderRadius.circular(5.0),
+                          ), 
+                        child: socialIcon("images/facebook.png")
+                      ),
                     ),
                   ],
                 ),

@@ -1,20 +1,37 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DropDown extends StatelessWidget {
+class DropDown extends StatefulWidget {
   final String dropdownItem;
   final List<String> items;
-  final String selectedItem;
+  final String? selectedItem;  // Allow selectedItem to be nullable
   final void Function(String) onSelected;
 
   const DropDown({
     super.key,
     required this.dropdownItem,
     required this.items,
-    required this.selectedItem,
     required this.onSelected,
+    this.selectedItem,  // Make selectedItem optional
   });
+
+  @override
+  _DropDownState createState() => _DropDownState();
+}
+
+class _DropDownState extends State<DropDown> {
+  late String _selectedItem;
+
+  @override
+  void initState() {
+    super.initState();
+    // Set _selectedItem to selectedItem if provided and valid, otherwise to the first item of the list
+    if (widget.selectedItem != null && widget.items.contains(widget.selectedItem)) {
+      _selectedItem = widget.selectedItem!;
+    } else {
+      _selectedItem = widget.items.first;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +48,17 @@ class DropDown extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
               side: const BorderSide(
-                  color: Colors.black, width: 1), // Add a border
+                  color: Colors.white, width: 4), // Add a border
             ),
           ),
           onPressed: () {
             showModalBottomSheet<void>(
               context: context,
               backgroundColor:
-                  Colors.white, // Set modal bottom sheet background to white
+                  Colors.black, // Set modal bottom sheet background to black
               builder: (BuildContext context) {
                 return Container(
-                  color:
-                      Colors.white, // Ensure the container background is white
+                  color: Colors.black, // Ensure the container background is black
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -50,41 +66,47 @@ class DropDown extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          dropdownItem,
+                          widget.dropdownItem,
                           textAlign: TextAlign.center,
                           style: GoogleFonts.bebasNeue(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black, // Ensure text is visible
+                            color: Colors.white, // Ensure text is visible
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height:
-                            200, // Adjust height to ensure 4 items are visible
-                        child: CupertinoPicker(
-                          scrollController:
-                              FixedExtentScrollController(initialItem: 0),
-                          itemExtent: 40,
-                          onSelectedItemChanged: (int index) {
-                            onSelected(items[index]);
-                            print(items[index]); 
-                          },
-                          backgroundColor:
-                              Colors.white, // Set picker background to white
-                          children: items.map((String item) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                item,
-                                style: GoogleFonts.poppins(
-                                  fontSize: 14,
-                                  color: Colors.black, // Ensure text is visible
-                                  fontWeight: FontWeight.w500,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            dropdownColor: Colors.black,
+                            iconEnabledColor: Colors.white,
+                            value: _selectedItem,
+                            items: widget.items.map((String item) {
+                              return DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    color: Colors.white, // Ensure text is visible
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                            );
-                          }).toList(),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              if (newValue != null) {
+                                setState(() {
+                                  _selectedItem = newValue;
+                                });
+                                widget.onSelected(newValue);
+                                Navigator.pop(context);
+                              }
+                            },
+                            isExpanded: true,
+                            iconSize: 24,
+                          ),
                         ),
                       ),
                     ],
@@ -96,7 +118,7 @@ class DropDown extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: Text(
-              dropdownItem,
+              widget.dropdownItem,
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.clip,

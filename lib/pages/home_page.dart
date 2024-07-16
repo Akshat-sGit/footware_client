@@ -5,7 +5,6 @@ import 'package:footwear_client/controller/home_controller.dart';
 import 'package:footwear_client/model/user/user.dart'; 
 import 'package:footwear_client/pages/product_description_page.dart';
 import 'package:footwear_client/pages/splash_screen.dart';
-import 'package:footwear_client/utils/colors.dart';
 import 'package:footwear_client/widgets/dropdown_btn.dart';
 import 'package:footwear_client/widgets/multi_select_dropdown.dart';
 import 'package:footwear_client/widgets/product_card.dart';
@@ -52,7 +51,7 @@ class HomePage extends StatelessWidget {
               ),
             ],
             leading: IconButton(onPressed:() {
-              Navigator.pop(context);
+              ctrl.resetFilters();
             },
              icon: const Icon(
               Icons.arrow_back_ios,
@@ -77,29 +76,23 @@ class HomePage extends StatelessWidget {
                           padding: const EdgeInsets.all(6.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              boxShadow:  [
-                                BoxShadow(
-                                  color: buttonColor,
-                                  spreadRadius: 0.5,
-                                  offset: const Offset(1, 0.5),
-                                  blurRadius: 2,
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Chip(
+                              elevation: 5,
+                              shadowColor: Colors.grey,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(10),
                                 side:const BorderSide(
-                                  color: Colors.white,
-                                  width: 1.5,
+                                  color:Colors.white ,
+                                  width: 2,
                                 ),
                               ),
-                              backgroundColor: buttonColor,
+                              backgroundColor: Colors.white,
                               label: Text(
                                 ctrl.productCategory[index].name ?? "Error",
                                 style: GoogleFonts.bebasNeue(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -117,13 +110,15 @@ class HomePage extends StatelessWidget {
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
-                      child: MultiSelectDropDown(
-                        name: "Brand", 
-                        items: const ['Nike', 'Puma', 'Adidas', 'Skechers'],
-                        onSelectionChanged: (value) {
-                          ctrl.filterByBrand(value);
-                        },
-                      ),
+                      child: Obx(() {
+                        return MultiSelectDropDown(
+                          name: "Brand", 
+                          items: ctrl.brands.toList(), // Use dynamic list of brands
+                          onSelectionChanged: (value) {
+                            ctrl.filterByBrand(value);
+                          },
+                        );
+                      }),
                     ),
                   ),
                   Flexible(

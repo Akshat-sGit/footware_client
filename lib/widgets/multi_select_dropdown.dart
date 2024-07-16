@@ -12,7 +12,7 @@ class MultiSelectDropDown extends StatelessWidget {
     super.key,
     required this.items,
     required this.onSelectionChanged,
-    required this.name
+    required this.name,
   });
 
   @override
@@ -30,64 +30,83 @@ class MultiSelectDropDown extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
               side: const BorderSide(
-                color: Colors.black,
-                width: 1,
+                color: Colors.white,
+                width: 4,
               ),
             ),
           ),
           onPressed: () {
             showModalBottomSheet<void>(
               context: context,
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.black,
               builder: (BuildContext context) {
                 return StatefulBuilder(
                   builder: (BuildContext context, StateSetter setState) {
-                    return Container( 
+                    return Container(
                       padding: const EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.black,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: items.map((item) {
-                          final isSelected = selectedItems.contains(item);
-                          return InkWell(
-                            onTap: () {
-                              setState(() {
-                                isSelected
-                                    ? selectedItems.remove(item)
-                                    : selectedItems.add(item);
-                                onSelectionChanged(selectedItems);
-                                print(selectedItems);
-                              });
-                            },
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    isSelected
-                                        ? Icons.check_box_outlined
-                                        : Icons.check_box_outline_blank,
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: Text(
-                                      item,
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                        children: [
+                          Text(
+                            name,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.bebasNeue(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          LimitedBox(
+                            maxHeight: 200, // Adjust height to ensure 4 items are visible
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: items.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final item = items[index];
+                                final isSelected = selectedItems.contains(item);
+                                return InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      isSelected
+                                          ? selectedItems.remove(item)
+                                          : selectedItems.add(item);
+                                      onSelectionChanged(selectedItems);
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          isSelected
+                                              ? Icons.check_box_outlined
+                                              : Icons.check_box_outline_blank,
+                                          color: Colors.white,
+                                        ),
+                                        const SizedBox(width: 16),
+                                        Expanded(
+                                          child: Text(
+                                            item,
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
+                                );
+                              },
                             ),
-                          );
-                        }).toList(),
+                          ),
+                        ],
                       ),
                     );
                   },
@@ -98,7 +117,7 @@ class MultiSelectDropDown extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: Text(
-              name, 
+              name,
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.clip,

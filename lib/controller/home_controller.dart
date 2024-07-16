@@ -14,6 +14,7 @@ class HomeController extends GetxController {
   var products = <Product>[].obs;
   var productCategory = <ProductCategory>[].obs;
   var productShowInUI = <Product>[].obs;
+  var brands = <String>[].obs; // New observable list for brands
 
   @override
   void onInit() {
@@ -32,6 +33,11 @@ class HomeController extends GetxController {
           .toList();
       products.assignAll(retrievedProducts);
       productShowInUI.assignAll(retrievedProducts);
+
+      // Extract distinct brands
+      Set<String> distinctBrands = retrievedProducts.map((product) => product.brand).where((brand) => brand != null).cast<String>().toSet();
+      brands.assignAll(distinctBrands.toList());
+
       Get.snackbar('Successful', 'Products fetched successfully',
           colorText: Colors.green);
     } catch (e) {
@@ -79,4 +85,9 @@ class HomeController extends GetxController {
     productShowInUI.assignAll(sortedProducts); 
     update();
   }
+  void resetFilters() {
+    productShowInUI.assignAll(products); // Reset the productShowInUI to show all products
+    update();
+  }
+
 }
