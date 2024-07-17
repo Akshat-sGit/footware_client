@@ -1,13 +1,11 @@
-// ignore_for_file: avoid_print
-
-import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:footwear_client/model/user/user.dart';
-import 'package:footwear_client/pages/home_page.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:otp_text_field_v2/otp_field_v2.dart';
+import 'package:footwear_client/model/user/user.dart' as custom_user;
+import 'package:footwear_client/pages/home_page.dart'; // Ensure HomePage is imported
 
 class LoginController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -23,18 +21,16 @@ class LoginController extends GetxController {
   OtpFieldControllerV2 otpController = OtpFieldControllerV2();
 
   bool otpFieldShown = false;
-  int? otpSend;
-  int? otpEntered;
-
-  User? loginUser;
+  String verificationId = "";
+  custom_user.User? loginUser;
 
   @override
   void onReady() {
     Map<String, dynamic>? user = box.read('loginUser');
     if (user != null) {
-      loginUser = User.fromJson(user);
+      loginUser = custom_user.User.fromJson(user);
       if (loginUser != null) {
-        Get.to(() => HomePage(loginUser: loginUser!));
+        Get.to(() => HomePage(loginUser: loginUser!)); // Ensure HomePage is defined and imported
       }
     }
     super.onReady();
@@ -46,26 +42,22 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
-  void addUser() {
+  void addUser() async {
     try {
-      if (otpSend == otpEntered) {
-        DocumentReference doc = userCollection.doc();
-        User user = User(
-          id: doc.id,
-          name: registerNameCtrl.text,
-          number: int.parse(registerNumberCtrl.text),
-        );
-        final userJson = user.toJson();
-        doc.set(userJson);
-        Get.snackbar('Success', 'User added successfully', colorText: Colors.green);
-        registerNameCtrl.clear();
-        registerNumberCtrl.clear();
-        otpController.clear();
-        otpFieldShown = false;
-        update();
-      } else {
-        Get.snackbar('Error', 'OTP is incorrect', colorText: Colors.red);
-      }
+      DocumentReference doc = userCollection.doc();
+      custom_user.User user = custom_user.User(
+        id: doc.id,
+        name: registerNameCtrl.text,
+        number: int.parse(registerNumberCtrl.text),
+      );
+      final userJson = user.toJson();
+      await doc.set(userJson);
+      Get.snackbar('Success', 'User added successfully', colorText: Colors.green);
+      registerNameCtrl.clear();
+      registerNumberCtrl.clear();
+      otpController.clear();
+      otpFieldShown = false;
+      update();
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
     }
@@ -77,14 +69,46 @@ class LoginController extends GetxController {
         Get.snackbar('Error', 'Please fill the fields!', colorText: Colors.red);
         return;
       }
-      final random = Random();
-      int otp = 1000 + random.nextInt(9000);
-      otpFieldShown = true;
-      otpSend = otp;
-      Get.snackbar('Success', 'Otp sent successfully!, OTP is $otp', colorText: Colors.green);
-      update();
+
+      FirebaseAuth auth = FirebaseAuth.instance;
+      auth.verifyPhoneNumber(
+        phoneNumber: '+91${registerNumberCtrl.text}', // Adjust country code as needed
+        timeout: const Duration(seconds: 60),
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await auth.signInWithCredential(credential);
+          addUser();
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          Get.snackbar('Error', e.message ?? 'Verification failed', colorText: Colors.red);
+          print(e.message); 
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          this.verificationId = verificationId;
+          otpFieldShown = true;
+          Get.snackbar('Success', 'OTP sent successfully', colorText: Colors.green);
+          update();
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          this.verificationId = verificationId;
+        },
+      );
     } catch (e) {
-      Get.snackbar('Error', '$e', colorText: Colors.red);
+      Get.snackbar('Error', e.toString(), colorText: Colors.red);
+      print(e.toString()); 
+    }
+  }
+
+  void verifyOtp(String otp) async {
+    try {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: otp,
+      );
+      await auth.signInWithCredential(credential);
+      addUser();
+    } catch (e) {
+      Get.snackbar('Error', 'OTP verification failed', colorText: Colors.red);
     }
   }
 
@@ -105,7 +129,7 @@ class LoginController extends GetxController {
             box.write('loginUser', userData);
             loginNumberCtrl.clear();
             if (userData != null) {
-              loginUser = User.fromJson(userData);
+              loginUser = custom_user.User.fromJson(userData);
               print('User logged in: ${loginUser!.name}'); // Debugging log
               Get.to(() => HomePage(loginUser: loginUser!));
             } else {

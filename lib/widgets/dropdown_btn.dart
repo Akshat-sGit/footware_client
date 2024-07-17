@@ -1,10 +1,12 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DropDown extends StatefulWidget {
   final String dropdownItem;
   final List<String> items;
-  final String? selectedItem;  // Allow selectedItem to be nullable
+  final String? selectedItem; // Allow selectedItem to be nullable
   final void Function(String) onSelected;
 
   const DropDown({
@@ -12,7 +14,7 @@ class DropDown extends StatefulWidget {
     required this.dropdownItem,
     required this.items,
     required this.onSelected,
-    this.selectedItem,  // Make selectedItem optional
+    this.selectedItem, // Make selectedItem optional
   });
 
   @override
@@ -48,20 +50,23 @@ class _DropDownState extends State<DropDown> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
               side: const BorderSide(
-                  color: Colors.white, width: 4), // Add a border
+                color: Colors.white,
+                width: 4,
+              ),
             ),
           ),
           onPressed: () {
             showModalBottomSheet<void>(
               context: context,
-              backgroundColor:
-                  Colors.black, // Set modal bottom sheet background to black
+              backgroundColor: Colors.black,
               builder: (BuildContext context) {
                 return Container(
-                  color: Colors.black, // Ensure the container background is black
+                  color: Colors.black,
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -71,42 +76,39 @@ class _DropDownState extends State<DropDown> {
                           style: GoogleFonts.bebasNeue(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white, // Ensure text is visible
+                            color: Colors.white,
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            dropdownColor: Colors.black,
-                            iconEnabledColor: Colors.white,
-                            value: _selectedItem,
-                            items: widget.items.map((String item) {
-                              return DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    color: Colors.white, // Ensure text is visible
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                      DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          dropdownColor: Colors.black,
+                          iconEnabledColor: Colors.white,
+                          value: _selectedItem,
+                          items: widget.items.map((String item) {
+                            return DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              if (newValue != null) {
-                                setState(() {
-                                  _selectedItem = newValue;
-                                });
-                                widget.onSelected(newValue);
-                                Navigator.pop(context);
-                              }
-                            },
-                            isExpanded: true,
-                            iconSize: 24,
-                          ),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              setState(() {
+                                _selectedItem = newValue;
+                              });
+                              widget.onSelected(newValue);
+                              Navigator.pop(context);
+                            }
+                          },
+                          isExpanded: true,
+                          iconSize: 24,
                         ),
                       ),
                     ],
@@ -123,9 +125,9 @@ class _DropDownState extends State<DropDown> {
               maxLines: 1,
               overflow: TextOverflow.clip,
               style: GoogleFonts.bebasNeue(
-                color: Colors.white, // Ensure text is visible
+                color: Colors.white,
                 fontWeight: FontWeight.w500,
-                fontSize: 16, // Increase font size for better readability
+                fontSize: 16,
               ),
             ),
           ),

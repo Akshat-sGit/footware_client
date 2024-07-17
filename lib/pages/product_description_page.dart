@@ -138,7 +138,7 @@ class ProductDescriptionPage extends StatelessWidget {
                             color: Colors.white54,
                           ),
                         ),
-                        style: const TextStyle(color: Colors.black),
+                        style: GoogleFonts.bebasNeue(color: Colors.white),
                       ),
                       const SizedBox(height: 20),
                     ],

@@ -15,13 +15,13 @@ class OtpTxtField extends StatelessWidget {
       visible: visible,
       child: OTPTextFieldV2(
         controller: otpController,
-        length: 4,
+        length: 6,
         width: MediaQuery.of(context).size.width,
         textFieldAlignment: MainAxisAlignment.spaceAround,
         fieldWidth: 45,
         fieldStyle: FieldStyle.underline,
         outlineBorderRadius: 15,
-        style: GoogleFonts.bebasNeue(fontSize: 17, color: Colors.black),
+        style: GoogleFonts.bebasNeue(fontSize: 17, color: Colors.white),
         onChanged: (pin) {
           // ignore: avoid_print
           print("Changed: $pin");
@@ -30,8 +30,7 @@ class OtpTxtField extends StatelessWidget {
           onComplete(pin); 
         },
         otpFieldStyle: OtpFieldStyle(
-          borderColor: Colors.transparent,
-
+          borderColor: Colors.white,
         ),
 
       ),

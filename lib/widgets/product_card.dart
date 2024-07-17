@@ -66,7 +66,7 @@ class ProductCard extends StatelessWidget {
                     ),
                     // Price
                     Text(
-                      '₹${price.toStringAsFixed(2)}',
+                      '₹${price.toStringAsFixed(0)}',
                       style: GoogleFonts.bebasNeue(
                         color: buttonColor,
                         fontSize: 16,

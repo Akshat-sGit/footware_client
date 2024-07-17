@@ -76,13 +76,13 @@ class HomePage extends StatelessWidget {
                           padding: const EdgeInsets.all(6.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             child: Chip(
                               elevation: 5,
                               shadowColor: Colors.grey,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(20),
                                 side:const BorderSide(
                                   color:Colors.white ,
                                   width: 2,
