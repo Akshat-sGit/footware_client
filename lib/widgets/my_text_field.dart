@@ -9,12 +9,13 @@ Container myTextField(String hint, Color color, TextEditingController controller
       ),
       child: TextField(
         controller: controller,
+        style: GoogleFonts.bebasNeue(color: Colors.white),
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 22,
           ),
-          fillColor: Colors.white,
+          fillColor: Colors.black,
           filled: true,
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
@@ -22,7 +23,7 @@ Container myTextField(String hint, Color color, TextEditingController controller
           ),
           hintText: hint,
           hintStyle: GoogleFonts.bebasNeue(
-            color: Colors.black45,
+            color: Colors.white54,
             fontSize: 19,
           ),
         ),

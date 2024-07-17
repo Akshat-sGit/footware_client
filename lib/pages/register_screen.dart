@@ -5,7 +5,7 @@ import 'package:footwear_client/widgets/my_text_field.dart';
 import 'package:footwear_client/widgets/otp_txt_field.dart';
 import 'package:footwear_client/widgets/social_icon.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:get/get.dart';  // Import GetX package
+import 'package:get/get.dart';
 import 'package:footwear_client/controller/login_controller.dart';
 
 class Register extends StatelessWidget {
@@ -17,7 +17,7 @@ class Register extends StatelessWidget {
     return GetBuilder<LoginController>(builder: (ctrl) {
       return Scaffold(
         body: Container(
-          color: Colors.white,
+          color: Colors.black,
           child: SafeArea(
             child: ListView(
               children: [
@@ -28,7 +28,7 @@ class Register extends StatelessWidget {
                   style: GoogleFonts.bebasNeue(
                     fontWeight: FontWeight.bold,
                     fontSize: 37,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -49,12 +49,12 @@ class Register extends StatelessWidget {
                 SizedBox(height: size.height * 0.04),
                 OtpTxtField(
                   otpController: ctrl.otpController,
-                  visible: ctrl.otpFieldShown, 
-                  onComplete: (otp){
-                    ctrl.otpEntered = int.tryParse(otp ?? '0000'); 
+                  visible: ctrl.otpFieldShown,
+                  onComplete: (otp) {
+                    ctrl.verifyOtp(otp ?? '0000');
                   },
-                ), 
-                SizedBox(height: size.height * 0.04), 
+                ),
+                SizedBox(height: size.height * 0.04),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
@@ -62,14 +62,12 @@ class Register extends StatelessWidget {
                       // for register button
                       GestureDetector(
                         onTap: () {
-                          if(ctrl.otpFieldShown){
+                          if (ctrl.otpFieldShown) {
                             ctrl.addUser();
-
-                          }else{
-                            ctrl.sendOtp(); 
-
+                          } else {
+                            ctrl.sendOtp();
                           }
-                          ctrl.update(); 
+                          ctrl.update();
                         },
                         child: Container(
                           width: size.width,
@@ -80,12 +78,12 @@ class Register extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              ctrl.buttonName, 
+                              ctrl.buttonName,
                               style: GoogleFonts.bebasNeue(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                                 fontSize: 22,
-                                letterSpacing: 1.0 
+                                letterSpacing: 1.0,
                               ),
                             ),
                           ),
@@ -98,7 +96,7 @@ class Register extends StatelessWidget {
                           Container(
                             height: 2,
                             width: size.width * 0.2,
-                            color: Colors.black12,
+                            color: Colors.white12,
                           ),
                           Text(
                             "  Or continue with   ",
@@ -111,7 +109,7 @@ class Register extends StatelessWidget {
                           Container(
                             height: 2,
                             width: size.width * 0.2,
-                            color: Colors.black12,
+                            color: Colors.white12,
                           ),
                         ],
                       ),
@@ -122,20 +120,30 @@ class Register extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              padding: const EdgeInsets.all(5.0), 
+                              padding: const EdgeInsets.all(5.0),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
                                   width: 2.0,
                                 ),
-                              borderRadius: BorderRadius.circular(5.0),
-                              ), 
-                              child: socialIcon("images/google.png")
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: socialIcon("images/google.png"),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: socialIcon("images/facebook.png"),
+                            child: Container(
+                              padding: const EdgeInsets.all(5.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: socialIcon("images/facebook.png"),
+                            ),
                           ),
                         ],
                       ),
@@ -164,7 +172,7 @@ class Register extends StatelessWidget {
                               style: GoogleFonts.bebasNeue(
                                 color: Colors.blue,
                                 fontWeight: FontWeight.bold,
-                                letterSpacing: 0.5, 
+                                letterSpacing: 0.5,
                               ),
                             ),
                           ),

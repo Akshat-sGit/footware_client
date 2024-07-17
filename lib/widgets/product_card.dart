@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:footwear_client/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductCard extends StatelessWidget {
@@ -22,60 +23,63 @@ class ProductCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        shadowColor: Colors.black,
-        color: Colors.black,
-        elevation: 2,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.fitWidth,
-                width: double.maxFinite,
-                height: 150,
+        color: Colors.white,
+        elevation: 8,
+        shadowColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side:  const BorderSide(color: Colors.black, width: 2), 
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Image section
+              AspectRatio(
+                aspectRatio: 3/2, // Adjust the aspect ratio as needed
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.fitWidth,
+                  width: double.infinity,
+                ),
+                
               ),
-            ),
-            const SizedBox(height: 2),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              const SizedBox(height: 8), // Space between image and text
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
+                    // Product name
                     Text(
                       name,
                       style: GoogleFonts.bebasNeue(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    // Price
+                    Text(
+                      '₹${price.toStringAsFixed(0)}',
+                      style: GoogleFonts.bebasNeue(
+                        color: buttonColor,
                         fontSize: 16,
-                        color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                    Text(
-                      '₹${price.toStringAsFixed(2)}',
-                      style: GoogleFonts.bebasNeue(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                    Text(
-                      offerTag, 
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 8, 
-                        color: Colors.green, 
-                      ),
-                    )
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
