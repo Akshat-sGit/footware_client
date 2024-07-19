@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.logout,
-                  color: Colors.white,
+                  color: Colors.red,
                 ),
               ),
             ],

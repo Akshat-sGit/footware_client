@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:footwear_client/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductCard extends StatelessWidget {
@@ -23,9 +22,9 @@ class ProductCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        color: Colors.white,
+        color: Colors.black,
         elevation: 8,
-        shadowColor: Colors.white,
+        shadowColor: Colors.grey,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side:  const BorderSide(color: Colors.black, width: 2), 
@@ -58,7 +57,7 @@ class ProductCard extends StatelessWidget {
                       name,
                       style: GoogleFonts.bebasNeue(
                         fontSize: 20,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -68,8 +67,8 @@ class ProductCard extends StatelessWidget {
                     Text(
                       '₹${price.toStringAsFixed(0)}',
                       style: GoogleFonts.bebasNeue(
-                        color: buttonColor,
-                        fontSize: 16,
+                        color: Colors.green,
+                        fontSize: 20,
                         fontWeight: FontWeight.w500,
                       ),
                       overflow: TextOverflow.ellipsis,

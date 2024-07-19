@@ -31,6 +31,8 @@ class OtpTxtField extends StatelessWidget {
         },
         otpFieldStyle: OtpFieldStyle(
           borderColor: Colors.white,
+          focusBorderColor: Colors.white, 
+          enabledBorderColor: Colors.white
         ),
 
       ),
