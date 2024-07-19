@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:footwear_client/controller/purchase_controller.dart';
 import 'package:footwear_client/utils/colors.dart';
@@ -22,6 +21,8 @@ class ProductDescriptionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<int> sizes = [4, 5, 6, 7, 8, 9, 10, 11, 12];
+
     return GetBuilder<PurchaseController>(builder: (ctrl) {
       return Scaffold(
         backgroundColor: Colors.black,
@@ -31,13 +32,14 @@ class ProductDescriptionPage extends StatelessWidget {
           title: Text(
             "Product Details",
             style: GoogleFonts.bebasNeue(
-              fontWeight: FontWeight.bold, 
+              fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
+              ctrl.resetSelectedSize(); // Reset the selected size when going back
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
@@ -66,8 +68,8 @@ class ProductDescriptionPage extends StatelessWidget {
                       Text(
                         name,
                         style: GoogleFonts.bebasNeue(
-                          fontWeight: FontWeight.bold, 
-                          fontSize: 28, 
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28,
                           color: Colors.white,
                         ),
                       ),
@@ -85,7 +87,7 @@ class ProductDescriptionPage extends StatelessWidget {
                               shaderCallback: (Rect bounds) {
                                 return LinearGradient(
                                   colors: [Colors.black.withOpacity(1), Colors.black.withOpacity(0.3)],
-                                  stops:const [0.0, 5.0],
+                                  stops: const [0.0, 5.0],
                                   tileMode: TileMode.repeated,
                                 ).createShader(bounds);
                               },
@@ -104,16 +106,16 @@ class ProductDescriptionPage extends StatelessWidget {
                                       Text(
                                         "Description",
                                         style: GoogleFonts.bebasNeue(
-                                          color: Colors.red,
+                                          color: buttonColor,
                                           fontSize: 18,
-                                          fontWeight: FontWeight.bold,
                                         ), // Ensuring the text is visible
                                       ),
                                       const SizedBox(height: 10),
                                       Text(
                                         description,
                                         style: GoogleFonts.bebasNeue(
-                                          fontSize: 18, 
+                                          fontSize: 16,
+                                          letterSpacing: 1,
                                           color: Colors.white,
                                         ), // Ensuring the text is visible
                                       ),
@@ -126,6 +128,53 @@ class ProductDescriptionPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20.0),
+                      Text(
+                        "Select Size",
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 50, // Adjust height as needed
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: sizes.map((size) {
+                            bool isSelected = size == ctrl.selectedSize;
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                              child: ChoiceChip(
+                                label: Text(
+                                  size.toString(),
+                                  style: GoogleFonts.bebasNeue(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                selected: isSelected,
+                                onSelected: (selected) {
+                                  ctrl.updateSelectedSize(size);
+                                },
+                                selectedColor: Colors.green,
+                                backgroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        "Enter Address",
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 10,), 
                       TextField(
                         controller: ctrl.addressController,
                         maxLines: 3,
@@ -145,13 +194,18 @@ class ProductDescriptionPage extends StatelessWidget {
                   ),
                 ),
               ),
+              Container(
+                color: Colors.green,
+                height: 2,
+                margin: const EdgeInsets.symmetric(vertical: 10),
+              ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Price:", 
+                      "Price:",
                       style: GoogleFonts.bebasNeue(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
@@ -173,21 +227,21 @@ class ProductDescriptionPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    elevation: 5,
-                    shadowColor: Colors.black,
+                    backgroundColor: Colors.black,
+                    elevation: 8,
+                    shadowColor: Colors.grey,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                       side: const BorderSide(color: Colors.white, width: 1),
                     ),
                   ),
                   onPressed: () {
-                    ctrl.submitOrder(price: price, item: name, description: description); 
+                    ctrl.submitOrder(price: price, item: name, description: description);
                   },
                   child: Text(
                     'Buy Now',
                     style: GoogleFonts.bebasNeue(
-                      color: buttonColor,
+                      color: Colors.green,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
@@ -198,6 +252,6 @@ class ProductDescriptionPage extends StatelessWidget {
           ),
         ),
       );
-    }); 
+    });
   }
 }

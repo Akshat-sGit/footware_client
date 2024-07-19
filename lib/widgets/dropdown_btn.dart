@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:footwear_client/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DropDown extends StatefulWidget {
@@ -76,7 +77,7 @@ class _DropDownState extends State<DropDown> {
                           style: GoogleFonts.bebasNeue(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: buttonColor,
                           ),
                         ),
                       ),

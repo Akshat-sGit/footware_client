@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:footwear_client/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 List<String> selectedItems = [];
@@ -57,7 +58,7 @@ class MultiSelectDropDown extends StatelessWidget {
                             style: GoogleFonts.bebasNeue(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: buttonColor,
                             ),
                           ),
                           const SizedBox(height: 10),
